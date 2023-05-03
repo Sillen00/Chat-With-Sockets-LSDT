@@ -1,47 +1,13 @@
-
-  @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100;200;400&display=swap');
-  @media (min-width: 768px) {
-    .navbar-toggler {
-      display: none !important;
-    }
-  }
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100;200;400&display=swap');
 
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
   margin: 0;
-    padding: 0;
-    background-color: #eeeeee;
-    font-family: 'Lexend';
-
+  padding: 0;
+  background-color: #eeeeee;
+  font-family: 'Lexend';
 }
 
-@media (min-width: 992px) {
-  .custom-navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 250px; /* Adjust the width of the aside bar as needed */
-    height: 100%;
-    padding-top: 1rem;
-    z-index: 1030; /* To make sure the aside bar is above other elements */
-  }
-
-  /* Apply additional styles to Offcanvas when it's an aside bar */
-  .custom-navbar .offcanvas {
-    position: static;
-    width: 100%;
-    height: auto;
-    border: none;
-    box-shadow: none;
-    transition: none;
-    visibility: none;
-    overflow: auto;
-  }
-
-  /* Hide the close button in the aside bar */
-  .custom-navbar .offcanvas-header .btn-close {
-    display: none;
-  }}

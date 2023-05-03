@@ -18,12 +18,7 @@ function Header() {
         <Container fluid>
           <div className='d-flex align-items-center'>
             <img src={chatterappLogo} alt='logo' width='100' />
-            <div className='ms-auto'>
-              <DirectMessage />
-              <Rooms />
-            </div>
-          </div>
-          
+          </div>  
           <Navbar.Toggle aria-controls='offcanvasNavbar-expand-lg' />
           <Navbar.Offcanvas style={{ backgroundColor: "#F0E6DC" }}
             id='offcanvasNavbar-expand-lg'
@@ -37,6 +32,8 @@ function Header() {
             </Offcanvas.Header>
             <Offcanvas.Body>
               <Nav className='justify-content-end flex-grow-1 pe-3' style={{display: 'flex', gap: '1rem'}}>        
+                <DirectMessage />
+                <Rooms />
               </Nav>
             </Offcanvas.Body>
           </Navbar.Offcanvas>
@@ -46,5 +43,6 @@ function Header() {
   );
 }
 
-
 export default Header;
+
+
