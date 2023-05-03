@@ -14,10 +14,10 @@ function Chat() {
   };
 
   return (
-    <div style={{ height: '100vh', border: '2px solid black', background: 'green' }}>
+    <div style={{ height: '100vh', border: '2px solid black', background: 'green', margin: '0 1rem' }}>
       <h1>Chat</h1>
       <p>Chat messages: {submittedText}</p>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} style={{ display: 'flex', gap: '2rem'}}>
         <input
           type='text'
           className='form-control'
@@ -25,7 +25,7 @@ function Chat() {
           onChange={handleChange}
           placeholder='Type your message here...'
         />
-        <Button type='submit'>Send</Button>
+        <Button type='submit' style={{width:'10rem'}}>Send</Button>
       </form>
     </div>
   );
