@@ -10,14 +10,15 @@ import App from './App';
 import SocketProvider from './context/SocketContext';
 import './index.css';
 import Login from './pages/login';
-import Chat from './pages/Chat';
+import Lobby from './pages/Lobby';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route path='/' element={<App />} />
       <Route index element={<Login />} />
-      <Route path='/chat' element={<Chat />} />
+      <Route path='/chat' element={<Lobby />} />
+      
     </>
   )
 );
