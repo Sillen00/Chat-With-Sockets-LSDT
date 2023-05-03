@@ -8,13 +8,14 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 import chatterappLogo from '../assets/chatterapplogo.svg';
 import DirectMessage from './Dm';
 import Rooms from './Rooms';
+import '../index.css'
 
 function Header() {
   return (
     <>
-    <Navbar style={{ backgroundColor: "#F0E6DC" }} expand='md' className='mb-3 d-flex justify-content-spacebetween'>
+   <Navbar style={{ backgroundColor: "#F0E6DC" }} expand='md' className='mb-3 custom-navbar w-100'>
+
       <Container fluid>
-        <Navbar.Brand href='#'></Navbar.Brand>
         <img src={chatterappLogo} alt='logo' width='100' />
         <Navbar.Toggle aria-controls='offcanvasNavbar-expand-lg' />
         <Navbar.Offcanvas style={{ backgroundColor: "#F0E6DC" }}
@@ -30,8 +31,7 @@ function Header() {
           <Offcanvas.Body>
             <Nav className='justify-content-end flex-grow-1 pe-3' style={{display: 'flex', gap: '1rem'}}>
               <DirectMessage />
-             <Rooms />
-            
+             <Rooms />            
             </Nav>
           </Offcanvas.Body>
         </Navbar.Offcanvas>
