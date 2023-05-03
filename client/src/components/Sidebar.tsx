@@ -1,7 +1,7 @@
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import chatterapplogo from '../assets/chatterapplogo.svg';
-function Header() {
+function Sidebar() {
   return (
     <>
       <Navbar bg="dark">       
@@ -20,4 +20,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default Sidebar;

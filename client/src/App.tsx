@@ -1,12 +1,12 @@
 import { Outlet } from 'react-router-dom';
-import Header from './components/navbar';
+import Sidebar from './components/Sidebar';
 
 function App() {
   return (
     <>
       <div>
         <main>
-          <Header />
+          <Sidebar />
           <Outlet />
         </main>
       </div>

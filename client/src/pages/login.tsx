@@ -1,4 +1,4 @@
-import { LoginForm } from "../components/UserInput"
+import { LoginForm } from "../components/LoginForm"
 
 function Login() {
   return (
