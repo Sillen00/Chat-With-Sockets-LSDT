@@ -18,8 +18,8 @@ function Lobby() {
           <Stack gap={4} className="col-md-5 mx-auto">
           <Header />
           <div className="d-none d-md-block">
-          <Rooms />
-          <Dm />
+          {/* <Rooms /> */}
+          {/* <Dm /> */}
           </div>
           </Stack>
         </Col>

@@ -13,7 +13,7 @@ import '../index.css'
 function Header() {
   return (
     <>
-      <Navbar style={{ backgroundColor: "#F0E6DC" }} expand='md' className='mb-3 custom-navbar w-100'>
+      <Navbar style={{ backgroundColor: "#F0E6DC" }} expand='md' className='mb-3 '>
 
         <Container fluid>
           <div className='d-flex align-items-center'>
