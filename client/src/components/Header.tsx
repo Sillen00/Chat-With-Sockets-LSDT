@@ -13,30 +13,35 @@ import '../index.css'
 function Header() {
   return (
     <>
-   <Navbar style={{ backgroundColor: "#F0E6DC" }} expand='md' className='mb-3 custom-navbar w-100'>
+      <Navbar style={{ backgroundColor: "#F0E6DC" }} expand='md' className='mb-3 custom-navbar w-100'>
 
-      <Container fluid>
-        <img src={chatterappLogo} alt='logo' width='100' />
-        <Navbar.Toggle aria-controls='offcanvasNavbar-expand-lg' />
-        <Navbar.Offcanvas style={{ backgroundColor: "#F0E6DC" }}
-          id='offcanvasNavbar-expand-lg'
-          aria-labelledby='offcanvasNavbarLabel-expand-lg'
-          placement='end'
-        >
-          <Offcanvas.Header closeButton>
-            <Offcanvas.Title id='offcanvasNavbarLabel-expand-lg'>
-              Offcanvas
-            </Offcanvas.Title>
-          </Offcanvas.Header>
-          <Offcanvas.Body>
-            <Nav className='justify-content-end flex-grow-1 pe-3' style={{display: 'flex', gap: '1rem'}}>
+        <Container fluid>
+          <div className='d-flex align-items-center'>
+            <img src={chatterappLogo} alt='logo' width='100' />
+            <div className='ms-auto'>
               <DirectMessage />
-             <Rooms />            
-            </Nav>
-          </Offcanvas.Body>
-        </Navbar.Offcanvas>
-      </Container>
-    </Navbar>
+              <Rooms />
+            </div>
+          </div>
+          
+          <Navbar.Toggle aria-controls='offcanvasNavbar-expand-lg' />
+          <Navbar.Offcanvas style={{ backgroundColor: "#F0E6DC" }}
+            id='offcanvasNavbar-expand-lg'
+            aria-labelledby='offcanvasNavbarLabel-expand-lg'
+            placement='end'
+          >
+            <Offcanvas.Header closeButton>
+              <Offcanvas.Title id='offcanvasNavbarLabel-expand-lg'>
+                Offcanvas
+              </Offcanvas.Title>
+            </Offcanvas.Header>
+            <Offcanvas.Body>
+              <Nav className='justify-content-end flex-grow-1 pe-3' style={{display: 'flex', gap: '1rem'}}>        
+              </Nav>
+            </Offcanvas.Body>
+          </Navbar.Offcanvas>
+        </Container>
+      </Navbar>
     </>
   );
 }
