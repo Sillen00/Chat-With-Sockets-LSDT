@@ -30,8 +30,8 @@ function Chat() {
   return (
     <div
       style={{
-        minHeight: '80vh',
-        maxHeight: '100vh',
+        // minHeight: '80vh',
+        // maxHeight: '100vh',
         border: '2px solid black',
         backgroundImage: `url(${purple})`,
         backgroundSize: 'cover',
@@ -40,10 +40,10 @@ function Chat() {
         padding: '1rem',
       }}
     >
-      <Container fluid style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+      <Container fluid style={{ minHeight: '80vh', display: 'flex', flexDirection: 'column' }}>
         <Row style={{ flexGrow: 1, marginBottom: '1rem', overflowY: 'auto' }}>
           <Col>
-            <ListGroup>
+            <ListGroup style={{ maxHeight: '80vh', overflowY: 'auto'}}>
               {messages.map((msg, index) => (
                 <ListGroup.Item key={index}>
                   <strong>{msg.username}: </strong>
@@ -56,7 +56,7 @@ function Chat() {
         <Row className="d-flex align-items-end">
           <Col>
             <Form onSubmit={handleSubmit}>
-              <InputGroup>
+              <InputGroup style={{marginTop: 'auto'}}>
                 <Form.Control
                   type='text'
                   value={chatText}

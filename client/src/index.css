@@ -11,17 +11,39 @@ body {
   font-family: 'Lexend';
 }
 
+#custom-navbar {
+  background: #F0E6DC;
+  position: relative;
+  height: 64px;
+}
+
+
 @media screen and (min-width: 768px) {
   #offcanvasNavbar-expand-lg .justify-content-end.flex-grow-1.pe-3 > * {
     opacity: 0;
     visibility: hidden;
   }
+  #custom-navbar{
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+  }
+
+  #custom-navbar-nav{
+    border-bottom: 1px solid black;
+  }
 }
 
-@media (max-width: 767px) {
+
+@media (max-width: 768px) {
   .hide-on-mobile {
     opacity: 0;
     visibility: hidden;
     display: none;
   }
 }
+
