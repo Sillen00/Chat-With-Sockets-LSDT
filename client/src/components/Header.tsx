@@ -13,15 +13,16 @@ import '../index.css'
 function Header() {
   return (
     <>
-      <Navbar  id='custom-navbar' expand='md' className='mb-3 w-100'>
-        <Container fluid >
-          <div className='d-flex align-items-center'>
+      <Navbar id='custom-navbar' expand='md' sticky='top' >
+        <Container id='fluid-desk' fluid >
+          <div className=' d-flex align-items-center flex-row'>
             <img src={chatterappLogo} alt='logo' width='100' />
-          </div>  
-          <div className='hide-on-mobile'>
+            {/* <div className='hide-on-mobile'>
             <DirectMessage />
             <Rooms />
-          </div>
+            </div> */}
+          </div>  
+          <div>
           <Navbar.Toggle aria-controls='offcanvasNavbar-expand-lg' />
           <Navbar.Offcanvas style={{ backgroundColor: "#F0E6DC" }}
             id='offcanvasNavbar-expand-lg'
@@ -34,12 +35,14 @@ function Header() {
               </Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
-              <Nav className='justify-content-end flex-grow-1 pe-3' style={{display: 'flex', gap: '1rem'}}>        
+              <Nav id='offcanvas-content' className='justify-content-end flex-grow-1 pe-3' style={{display: 'flex', gap: '1rem'}}>        
                 <DirectMessage />
                 <Rooms />
               </Nav>
             </Offcanvas.Body>
           </Navbar.Offcanvas>
+
+          </div>
         </Container>
       </Navbar>
     </>
