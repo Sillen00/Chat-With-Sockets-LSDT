@@ -15,6 +15,15 @@ body {
   background: #F0E6DC;
   position: relative;
   height: 64px;
+  width: 100%;
+}
+.hide-on-mobile {
+  display: flex;
+  align-items: start;
+  flex-direction: column;
+  justify-content: space-between;
+  
+
 }
 
 
@@ -22,19 +31,31 @@ body {
   #offcanvasNavbar-expand-lg .justify-content-end.flex-grow-1.pe-3 > * {
     opacity: 0;
     visibility: hidden;
+    display: none;
+  }
+  #fluid-desk {
+    position: absolute;
+    /* max-width: 100%; */
+    /* padding-right: 0; */
+    /* padding-left: 0; */
+   /* top: 0; */
   }
   #custom-navbar{
-    height: 100vh;
+    /* height: 100vh; */
     padding: 0;
     margin: 0;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    /* justify-content: flex-start; */
+    /* align-items: center; */
     
   }
 
   #custom-navbar-nav{
     border-bottom: 1px solid black;
+  }
+
+  #offcanvas-content {
+    display: none;
   }
 }
 
