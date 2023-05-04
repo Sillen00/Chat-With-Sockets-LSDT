@@ -11,6 +11,24 @@ body {
   font-family: 'Lexend';
 }
 
+.login-body {
+  background-image: url('../src/assets/purple.png'); 
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+  width: 40vh;
+  background-color: #F0E6DC;
+  border-radius: 10px;
+  border: 1px solid black !important;
+
+}
+
 #custom-navbar {
   background: #F0E6DC;
   position: relative;
@@ -72,6 +90,11 @@ body {
     opacity: 0;
     visibility: hidden;
     display: none;
+  }
+
+  .login-container {
+    height: auto;
+    padding: 1rem;
   }
 }
 
