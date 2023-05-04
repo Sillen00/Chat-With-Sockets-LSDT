@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Col, Row, ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
+import { ButtonGroup, Button, Col, Row } from 'react-bootstrap';
 import { useLocation } from 'react-router-dom';
 import Chat from '../components/Chat';
 import { dm } from '../components/Dm';
@@ -11,8 +11,8 @@ function Lobby() {
   const { username } = location.state;
   const [showRooms, setShowRooms] = useState(true);
 
-  const handleSwitchChange = (value: string) => {
-    setShowRooms(value === 'rooms');
+  const toggleRooms = () => {
+    setShowRooms(!showRooms);
   };
 
   return (
@@ -24,25 +24,27 @@ function Lobby() {
             className='hide-on-mobile '
             style={{ minHeight: '100vh', backgroundColor: '#F0E6DC' }}
           >
-            <div className='my-3'>{showRooms ? <h4>Rooms</h4> : <h4>DM</h4>}</div>
-            <ToggleButtonGroup
-              type='radio'
-              name='options'
-              defaultValue={showRooms ? 'rooms' : 'dm'}
-              onChange={handleSwitchChange}
-              className='d-flex justify-content-center align-items-center mb-3'
-            >
-              <ToggleButton variant='outline-primary' value='rooms'>
+            <div className='my-3'>
+              <h4>{showRooms ? 'Rooms' : 'DM'}</h4>
+            </div>
+            <ButtonGroup aria-label='Buttongroup for room or DM'>
+              <Button
+                variant={showRooms ? 'dark' : 'light'}
+                onClick={toggleRooms}
+              >
                 Rooms
-              </ToggleButton>
-              <ToggleButton variant='outline-primary' value='dm'>
+              </Button>
+              <Button
+                variant={!showRooms ? 'dark' : 'light'}
+                onClick={toggleRooms}
+              >
                 DM
-              </ToggleButton>
-            </ToggleButtonGroup>
+              </Button>
+            </ButtonGroup>
             <div className='flex-grow-1'>
               {showRooms
-                ? allRooms.map(room => <div key={room.id}>{room.name}</div>)
-                : dm.map(message => <div key={message.id}>{message.name}</div>)}
+                ? allRooms.map((room) => <div key={room.id}>{room.name}</div>)
+                : dm.map((message) => <div key={message.id}>{message.name}</div>)}
             </div>
           </div>
         </Row>
