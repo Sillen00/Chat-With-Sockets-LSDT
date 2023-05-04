@@ -11,10 +11,10 @@ function Lobby() {
   const { username } = location.state;
 
   return (
-    <Container>
+    
       <Row>
         <Col md={4} style={{ padding: '0' }}>
-          <Stack gap={4} className="col-md-5 mx-auto">
+          <Stack gap={4} className="col-md-5 mx-auto w-100">
             <Header />
             <div className="hide-on-mobile">
               <Rooms />
@@ -26,7 +26,7 @@ function Lobby() {
           <Chat />
         </Col>
       </Row>
-    </Container>
+ 
   );
 }
 
