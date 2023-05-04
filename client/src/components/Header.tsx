@@ -13,8 +13,7 @@ import '../index.css'
 function Header() {
   return (
     <>
-      <Navbar style={{ backgroundColor: "#F0E6DC" }} expand='md' className='mb-3 '>
-
+      <Navbar style={{ backgroundColor: "#F0E6DC", position:"relative", height: "75px" }} expand='md' className='mb-3 custom-navbar w-100'>
         <Container fluid>
           <div className='d-flex align-items-center'>
             <img src={chatterappLogo} alt='logo' width='100' />

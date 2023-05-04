@@ -11,3 +11,17 @@ body {
   font-family: 'Lexend';
 }
 
+@media screen and (min-width: 768px) {
+  #offcanvasNavbar-expand-lg .justify-content-end.flex-grow-1.pe-3 > * {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@media (max-width: 767px) {
+  .hide-on-mobile {
+    opacity: 0;
+    visibility: hidden;
+    display: none;
+  }
+}
