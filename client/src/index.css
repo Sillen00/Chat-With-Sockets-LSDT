@@ -26,6 +26,13 @@ body {
 
 }
 
+.message-item {
+  margin-bottom: 1rem;
+  display: inline-block;
+  width: fit-content;
+  border: 1px solid black !important;
+}
+
 
 @media screen and (min-width: 768px) {
   #offcanvasNavbar-expand-lg .justify-content-end.flex-grow-1.pe-3 > * {

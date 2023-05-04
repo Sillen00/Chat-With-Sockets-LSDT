@@ -45,7 +45,7 @@ function Chat() {
           <Col>
             <ListGroup style={{ maxHeight: '80vh', overflowY: 'auto'}}>
               {messages.map((msg, index) => (
-                <ListGroup.Item key={index}>
+                <ListGroup.Item key={index} className="message-item">
                   <strong>{msg.username}: </strong>
                   <p style={{ display: 'inline' }}>{msg.message}</p>
                 </ListGroup.Item>
