@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { Button } from 'react-bootstrap';
 
-const dm = [
+
+// Detta skall vara en lista på alla rum som finns
+const allRooms = [
   {
     name: 'test',
     id: '1',
@@ -20,7 +22,7 @@ function Rooms() {
       <Button onClick={handleButtonClick}>Rooms</Button>
       {showList && (
         <ul>
-          {dm.map(item => (
+          {allRooms.map(item => (
             <li key={item.id}>{item.name}</li>
           ))}
         </ul>

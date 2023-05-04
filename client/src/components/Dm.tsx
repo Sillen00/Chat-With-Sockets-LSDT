@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Button } from 'react-bootstrap';
 
+// Detta skall vara en lista på alla DM's eller online users som finns
 const dm = [
   {
     name: 'test',
