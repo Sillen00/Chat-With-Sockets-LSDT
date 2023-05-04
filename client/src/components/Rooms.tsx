@@ -3,9 +3,13 @@ import { Button } from 'react-bootstrap';
 
 
 // Detta skall vara en lista på alla rum som finns
-const allRooms = [
+export const allRooms = [
   {
-    name: 'test',
+    name: 'Room1',
+    id: '1',
+  },
+  {
+    name: 'Room1',
     id: '1',
   },
 ];
