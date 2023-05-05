@@ -16,14 +16,14 @@ function Lobby() {
   };
 
   return (
-    <Row>
-      <Col md={4} className='nopadding'>
+    <Row style={{ height: '100vh', margin: '0' }}>
+      <Col md={4} style={{ padding: '0', height: '100%', overflow: 'hidden' }}>
         {/* <Row className='col-md-5 mx-auto w-100 h-100'> */}
+        <Header />
           <div
             className='hide-on-mobile '
             style={{ backgroundColor: '#F0E6DC' }}
           >
-          <Header />
             <div className='my-3'>
               <h4>{showRooms ? 'Rooms' : 'DM'}</h4>
             </div>
@@ -49,8 +49,8 @@ function Lobby() {
           </div>
         {/* </Row> */}
       </Col>
-      <Col xs={12} md={8} className='nopadding'>
-          <Chat />  
+      <Col xs={12} md={8} >
+                <Chat />  
       </Col>
     </Row>
   );

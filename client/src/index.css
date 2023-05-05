@@ -38,7 +38,7 @@ body {
 .hide-on-mobile {
   display: flex;
   align-items: start;
-  height: 100vh;
+  /* height: 100vh; */
   flex-direction: column;
   justify-content: space-between;
   
