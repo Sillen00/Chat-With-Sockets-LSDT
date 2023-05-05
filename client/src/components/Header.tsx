@@ -21,10 +21,6 @@ function Header() {
         <Container id='fluid-desk' fluid>
           <div className=' d-flex align-items-center flex-row'>
             <img src={chatterappLogo} alt='logo' width='100' />
-            {/* <div className='hide-on-mobile'>
-            <DirectMessage />
-            <Rooms />
-            </div> */}
           </div>
           <div>
             <Navbar.Toggle aria-controls='offcanvasNavbar-expand-lg' />

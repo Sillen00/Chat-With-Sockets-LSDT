@@ -1,10 +1,10 @@
-import { useState } from 'react';
-import { ButtonGroup, Button, Col, Row } from 'react-bootstrap';
-import { useLocation } from 'react-router-dom';
-import Chat from '../components/Chat';
-import { dm } from '../components/Dm';
-import Header from '../components/Header';
-import { allRooms } from '../components/Rooms';
+import { useState } from "react";
+import { Button, ButtonGroup, Col, Row } from "react-bootstrap";
+import { useLocation } from "react-router-dom";
+import Chat from "../components/Chat";
+import { dm } from "../components/Dm";
+import Header from "../components/Header";
+import { allRooms } from "../components/Rooms";
 
 function Lobby() {
   const location = useLocation();
@@ -17,13 +17,13 @@ function Lobby() {
 
   return (
     <Row>
-      <Col md={4}>
-        <Row className='col-md-5 mx-auto w-100'>
-          <Header />
+      <Col md={4} className='nopadding'>
+        {/* <Row className='col-md-5 mx-auto w-100 h-100'> */}
           <div
             className='hide-on-mobile '
-            style={{ minHeight: '100vh', backgroundColor: '#F0E6DC' }}
+            style={{ backgroundColor: '#F0E6DC' }}
           >
+          <Header />
             <div className='my-3'>
               <h4>{showRooms ? 'Rooms' : 'DM'}</h4>
             </div>
@@ -47,10 +47,10 @@ function Lobby() {
                 : dm.map((message) => <div key={message.id}>{message.name}</div>)}
             </div>
           </div>
-        </Row>
+        {/* </Row> */}
       </Col>
-      <Col xs={12} md={8}>
-        <Chat />
+      <Col xs={12} md={8} className='nopadding'>
+          <Chat />  
       </Col>
     </Row>
   );

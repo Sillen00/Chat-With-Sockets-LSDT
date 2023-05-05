@@ -38,6 +38,7 @@ body {
 .hide-on-mobile {
   display: flex;
   align-items: start;
+  height: 100vh;
   flex-direction: column;
   justify-content: space-between;
   
@@ -49,6 +50,10 @@ body {
   display: inline-block;
   width: fit-content;
   border: 1px solid black !important;
+}
+
+.nopadding {
+  padding: 0!important;
 }
 
 

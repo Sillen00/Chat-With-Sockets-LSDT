@@ -30,17 +30,19 @@ function Chat() {
   return (
     <div
       style={{
-        // minHeight: '80vh',
-        // maxHeight: '100vh',
+        minHeight: "100vh",
+        maxHeight: '100vh',
         border: '2px solid black',
         backgroundImage: `url(${purple})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        margin: '1rem',
+        width: "100%",
+        overflow: "hidden",
+        // margin: '1rem',
         padding: '1rem',
       }}
     >
-      <Container fluid style={{ minHeight: '80vh', display: 'flex', flexDirection: 'column' }}>
+      <Container fluid style={{ minHeight: '98vh', display: 'flex', flexDirection: 'column' }}>
         <Row style={{ flexGrow: 1, marginBottom: '1rem', overflowY: 'auto' }}>
           <Col>
             <ListGroup style={{ maxHeight: '80vh', overflowY: 'auto'}}>
@@ -56,17 +58,17 @@ function Chat() {
         <Row className="d-flex align-items-end">
           <Col>
             <Form onSubmit={handleSubmit}>
-              <InputGroup style={{marginTop: 'auto'}}>
+              <InputGroup style={{ display: "flex", gap: "1rem", marginTop: 'auto'}}>
                 <Form.Control
                   type='text'
                   value={chatText}
                   onChange={handleChange}
                   placeholder='Type your message here...'
                 />
-                <InputGroup>
                   <Button type='submit' disabled={chatText.trim() === ''}>
                     Send
                   </Button>
+                <InputGroup>
                 </InputGroup>
               </InputGroup>
             </Form>
