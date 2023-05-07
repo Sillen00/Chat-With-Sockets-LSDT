@@ -17,12 +17,11 @@ function Lobby() {
 
   return (
     <Row style={{ height: '100vh', margin: '0' }}>
-      <Col md={4} style={{ padding: '0', height: '100%', overflow: 'hidden' }}>
-        {/* <Row className='col-md-5 mx-auto w-100 h-100'> */}
+      <Col md={3} style={{ padding: '0', borderRight: '2px solid black', overflow: 'hidden' }}>
         <Header />
           <div
             className='hide-on-mobile '
-            style={{ backgroundColor: '#F0E6DC' }}
+            style={{ backgroundColor: '#F0E6DC', height: '100%', padding: '1rem'}}
           >
             <div className='my-3'>
               <h4>{showRooms ? 'Rooms' : 'DM'}</h4>
@@ -47,10 +46,12 @@ function Lobby() {
                 : dm.map((message) => <div key={message.id}>{message.name}</div>)}
             </div>
           </div>
-        {/* </Row> */}
       </Col>
-      <Col xs={12} md={8} >
+      <Col xs={12} md={6} className="nopadding" >
                 <Chat />  
+      </Col>
+      <Col md={3} className="info-bar">
+        <h3>Info of choosen room</h3>
       </Col>
     </Row>
   );

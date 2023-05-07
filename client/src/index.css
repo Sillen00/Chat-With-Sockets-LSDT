@@ -41,8 +41,14 @@ body {
   /* height: 100vh; */
   flex-direction: column;
   justify-content: space-between;
-  
+}
 
+.info-bar {
+  background-color: #F0E6DC;
+  border-left: 2px solid black;
+   height: 100%;
+    padding: 1rem;
+    color: red;
 }
 
 .message-item {
@@ -78,6 +84,17 @@ body {
     /* justify-content: flex-start; */
     /* align-items: center; */
     
+  }
+  .chat-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: black; 
+    height: 100vh;
+    width: 100%;
+    /* padding: 0; */
+    /* margin: 0; */
   }
 
   #custom-navbar-nav{
