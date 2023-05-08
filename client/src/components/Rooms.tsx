@@ -6,34 +6,32 @@ import { Button } from 'react-bootstrap';
 export const allRooms = [
   {
     name: 'Room1',
-    id: '1',
   },
   {
     name: 'Room2',
-    id: '1',
   },
 ];
 
 function Rooms() {
-  const [showList, setShowList] = useState(false);
+  // const [showList, setShowList] = useState(false);
 
-  const handleButtonClick = () => {
-    setShowList(!showList);
-  };
+  // const handleButtonClick = () => {
+  //   setShowList(!showList);
+  // };
 
   return (
     <div>
-      <Button onClick={handleButtonClick}>Rooms</Button>
-      {showList && (
+      {/* <Button onClick={handleButtonClick}>Rooms</Button> */}
+      {/* {showList && ( */}
         <ul>
           <div style={{border: '2px solid black', background: ''}}>
-          {allRooms.map(item => (
-            <li key={item.id}>{item.name}</li>
+          {allRooms.map((item, i) => (
+            <li key={i}>{item.name}</li>
           ))}
 
         </div>
         </ul>
-      )}
+      {/* )} */}
     </div>
   );
 }

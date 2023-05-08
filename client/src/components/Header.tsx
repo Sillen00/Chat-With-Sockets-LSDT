@@ -5,9 +5,9 @@ import Navbar from 'react-bootstrap/Navbar';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import chatterappLogo from '../assets/chatterapplogo.svg';
 import '../index.css';
-import { dm } from './Dm';
+import Dm from './Dm';
 import LeaveRoom from './LeaveRoom';
-import { allRooms } from './Rooms';
+import Rooms from './Rooms';
 
 function Header() {
   const [showRooms, setShowRooms] = useState(true);
@@ -49,11 +49,7 @@ function Header() {
                       DM
                     </Button>
                   </ButtonGroup>
-                  <div>
-                    {showRooms
-                      ? allRooms.map(room => <div key={room.id}>{room.name}</div>)
-                      : dm.map(message => <div key={message.id}>{message.name}</div>)}
-                  </div>
+                  <div>{showRooms ? <Rooms /> : <Dm />}</div>
                   <div className='leave-room-btn'>
                     <LeaveRoom />
                   </div>
