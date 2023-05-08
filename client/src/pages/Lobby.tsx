@@ -16,16 +16,17 @@ function Lobby() {
   };
 
   return (
-    <Row className="mx-0">
-      <Col md={4} className="px-0">
+
+    <Row style={{ height: '100vh', margin: '0' }}>
+      <Col md={3} style={{ padding: '0', borderRight: '2px solid black', overflow: 'hidden' }}>
         <Header />
-        <div>
           <div
-            className="hide-on-mobile"
-            style={{ backgroundColor: "#F0E6DC" }}
+            className='hide-on-mobile '
+            style={{ backgroundColor: '#F0E6DC', height: '100%', padding: '1rem'}}
           >
-            <div className="my-3">
-              <h4>{showRooms ? "Rooms" : "DM"}</h4>
+            <div className='my-3'>
+              <h4>{showRooms ? 'Rooms' : 'DM'}</h4>
+
             </div>
             <ButtonGroup aria-label="Buttongroup for room or DM">
               <Button
@@ -51,10 +52,14 @@ function Lobby() {
                   ))}
             </div>
           </div>
-        </div>
+
       </Col>
-      <Col xs={12} md={8} className="px-0">
-        <Chat />
+      <Col xs={12} md={6} className="nopadding" >
+                <Chat />  
+      </Col>
+      <Col md={3} className="info-bar">
+        <h3>Info of choosen room</h3>
+
       </Col>
     </Row>
   );

@@ -5,8 +5,8 @@ import Navbar from 'react-bootstrap/Navbar';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import chatterappLogo from '../assets/chatterapplogo.svg';
 import '../index.css';
-import DirectMessage, { dm } from './Dm';
-import Rooms, { allRooms } from './Rooms';
+import { dm } from './Dm';
+import { allRooms } from './Rooms';
 
 function Header() {
   const [showRooms, setShowRooms] = useState(true);
@@ -22,6 +22,7 @@ function Header() {
           <div className=' d-flex align-items-center flex-row'>
             <img src={chatterappLogo} alt='logo' width='100' />
           </div>
+         
           <div>
             <Navbar.Toggle aria-controls='offcanvasNavbar-expand-lg' />
             <Navbar.Offcanvas
