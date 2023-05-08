@@ -19,7 +19,7 @@ body {
   background-color: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background-color: gray;
+  background-color: rgb(200, 200, 200);
 }
 
 .login-body {
@@ -39,6 +39,11 @@ body {
   border: 1px solid black !important;
 }
 
+.lobby-row {
+  height: calc(100vh - 64px); /* 64px is the height of the navbar */
+  margin: 0;
+  overflow: hidden;
+}
 
 
 #custom-navbar {
@@ -63,7 +68,6 @@ body {
 }
 
 .message-item {
-  margin-bottom: 1rem;
   display: inline-block;
   width: fit-content;
   border: 1px solid black !important;
@@ -71,8 +75,10 @@ body {
 
 .nopadding {
   padding: 0 !important;
+  overflow: hidden;
 }
 
+/* MEDIA QUERRIES */
 @media screen and (min-width: 768px) {
   #offcanvasNavbar-expand-lg .justify-content-end.flex-grow-1.pe-3 > * {
     opacity: 0;
@@ -111,9 +117,11 @@ body {
     opacity: 0;
     visibility: hidden;
     display: none;
+    
   }
   .info-bar {
     display: none;
+    
   }
 
   .login-container {
@@ -122,5 +130,24 @@ body {
   }
   #custom-navbar {
    position: fixed;
+   
+  }
+  .msg-list-group {
+    margin-top: 4rem;
+
+  }
+
+  .send-message-mobile {
+    position: fixed;
+    z-index: 23;
+    bottom: 0;
+    overflow-y: auto;
+    
+    
+    
+  }
+  .msg-window-mobile {
+    max-height: 93vh;
+    overflow-y: auto;
   }
 }

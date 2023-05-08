@@ -50,9 +50,9 @@ function Chat() {
       }}
     >
       <Container fluid style={{ minHeight: '100%', display: 'flex', flexDirection: 'column' }}>
-        <Row style={{ flexGrow: 1, marginBottom: '1rem', overflowY: 'auto' }}>
-          <Col className='no-scrollbar'>
-            <ListGroup style={{ maxHeight: '93vh' }}>
+        <Row  style={{ flexGrow: 1, marginBottom: '1rem', overflowY: 'auto' }}>
+          <Col className='msg-window-mobile' >
+            <ListGroup  style={{ maxHeight: '90vh'}}className='msg-list-group'>
               {messages.map((msg, index) => (
                 <ListGroup.Item
                   key={index}
@@ -68,10 +68,10 @@ function Chat() {
           </Col>
         </Row>
         <Row className='d-flex align-items-end'>
-          <Col>
+          <Col className='send-message-mobile'>
             <Form onSubmit={handleSubmit}>
               <InputGroup
-                style={{ display: 'flex', gap: '1rem', marginTop: 'auto', marginBottom: '1rem' }}
+                style={{ display: 'flex', gap: '1rem', marginBottom: '1rem' }}
               >
                 <Form.Control
                   type='text'

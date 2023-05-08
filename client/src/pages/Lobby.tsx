@@ -47,7 +47,7 @@ function Lobby() {
         <Chat />
       </Col>
       <Col md={3} className='info-bar'>
-        <h3>You are in room: ???</h3>
+        <h3>You are in room:</h3>
           <div>
             <LeaveRoom />
           </div>
