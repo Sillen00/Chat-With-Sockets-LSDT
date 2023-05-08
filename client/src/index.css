@@ -59,6 +59,9 @@ body {
   justify-content: space-between;
 }
 
+.leave-room-btn {
+}
+
 .info-bar {
   background-color: #f0e6dc;
   border-left: 2px solid black;
@@ -123,6 +126,7 @@ body {
     display: none;
     
   }
+ 
 
   .login-container {
     height: auto;

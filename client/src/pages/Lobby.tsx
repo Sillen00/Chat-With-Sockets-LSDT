@@ -38,6 +38,7 @@ function Lobby() {
           </ButtonGroup>
           <div className='flex-grow-1'>
             {showRooms
+            // SOCKET.IO STUFF WILL GO HERE
               ? allRooms.map(room => <div key={room.id}>{room.name}</div>)
               : dm.map(message => <div key={message.id}>{message.name}</div>)}
           </div>
