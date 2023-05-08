@@ -6,6 +6,7 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 import chatterappLogo from '../assets/chatterapplogo.svg';
 import '../index.css';
 import { dm } from './Dm';
+import LeaveRoom from './LeaveRoom';
 import { allRooms } from './Rooms';
 
 function Header() {
@@ -22,7 +23,7 @@ function Header() {
           <div className=' d-flex align-items-center flex-row'>
             <img src={chatterappLogo} alt='logo' width='100' />
           </div>
-         
+
           <div>
             <Navbar.Toggle aria-controls='offcanvasNavbar-expand-lg' />
             <Navbar.Offcanvas
@@ -37,7 +38,7 @@ function Header() {
               <Offcanvas.Body>
                 <Nav
                   id='offcanvas-content'
-                  className='justify-content-end flex-grow-1 pe-3'
+                  className='justify-content-end flex-grow-1 pe-3 '
                   style={{ display: 'flex', gap: '1rem' }}
                 >
                   <ButtonGroup aria-label='Buttongroup for room or DM'>
@@ -48,9 +49,14 @@ function Header() {
                       DM
                     </Button>
                   </ButtonGroup>
-                  {showRooms
-                    ? allRooms.map(room => <div key={room.id}>{room.name}</div>)
-                    : dm.map(message => <div key={message.id}>{message.name}</div>)}
+                  <div>
+                    {showRooms
+                      ? allRooms.map(room => <div key={room.id}>{room.name}</div>)
+                      : dm.map(message => <div key={message.id}>{message.name}</div>)}
+                  </div>
+                  <div className='leave-room-btn'>
+                    <LeaveRoom />
+                  </div>
                 </Nav>
               </Offcanvas.Body>
             </Navbar.Offcanvas>

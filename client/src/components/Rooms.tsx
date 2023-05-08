@@ -9,7 +9,7 @@ export const allRooms = [
     id: '1',
   },
   {
-    name: 'Room1',
+    name: 'Room2',
     id: '1',
   },
 ];
@@ -26,9 +26,12 @@ function Rooms() {
       <Button onClick={handleButtonClick}>Rooms</Button>
       {showList && (
         <ul>
+          <div style={{border: '2px solid black', background: ''}}>
           {allRooms.map(item => (
             <li key={item.id}>{item.name}</li>
           ))}
+
+        </div>
         </ul>
       )}
     </div>
