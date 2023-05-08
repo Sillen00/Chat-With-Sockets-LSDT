@@ -9,7 +9,7 @@ export const allRooms = [
     id: '1',
   },
   {
-    name: 'Room1',
+    name: 'Room2',
     id: '1',
   },
 ];
