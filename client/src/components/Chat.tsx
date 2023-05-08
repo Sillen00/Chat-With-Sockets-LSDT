@@ -9,8 +9,6 @@ interface Message {
 }
 
 function Chat() {
-  const location = useLocation();
-  const { username } = location.state;
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -21,10 +19,7 @@ function Chat() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (chatText.trim() !== '') {
-      setMessages([...messages, { username, message: chatText }]);
-      setChatText('');
-    }
+
   };
 
   const [chatText, setChatText] = useState('');
@@ -40,14 +35,14 @@ function Chat() {
 
   return (
     <div
-      className='chat-container'
-      style={{
-        minHeight: '100vh',
-        backgroundImage: `url(${purple})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        overflow: 'hidden',
-      }}
+    className='chat-container'
+    style={{
+      minHeight: '100vh',
+      backgroundImage: `url(${purple})`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      overflow: 'hidden',
+    }}
     >
       <Container fluid style={{ minHeight: '100%', display: 'flex', flexDirection: 'column' }}>
         <Row  style={{ flexGrow: 1, marginBottom: '1rem', overflowY: 'auto' }}>

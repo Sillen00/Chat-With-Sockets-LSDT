@@ -1,6 +1,4 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useSocket } from '../context/SocketContext';
 import chatterappLogo from '../assets/chatterapplogo.svg';
 
 interface User {
@@ -9,17 +7,9 @@ interface User {
 
 export function LoginForm() {
   const [username, setUsername] = useState('');
-  const { socket } = useSocket();
-  const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (username.trim() === '') {
-      return;
-    }
-    const user: User = { username };
-    socket.emit('join', user);
-    navigate('/chat', { state: { username } });
   };
 
   return (

@@ -1,7 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { LoginForm } from '../components/LoginForm';
-import chatterappLogo from '../assets/chatterapplogo.svg';
-
 
 function Login() {
   return (

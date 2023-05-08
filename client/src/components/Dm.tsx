@@ -18,6 +18,7 @@ function DirectMessage() {
 
   return (
     <div>
+      <h1>hr</h1>
       <Button onClick={handleButtonClick}>DM's</Button>
       {showList && (
         <ul>

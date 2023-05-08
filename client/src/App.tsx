@@ -1,14 +1,10 @@
-import { Outlet } from 'react-router-dom';
-import Header from './components/Header';
+import Lobby from './pages/Lobby';
 
 function App() {
+  // const { room } = useSocket();
   return (
     <>
-      <div>
-        <main>
-          <Outlet />
-        </main>
-      </div>
+      <Lobby />
     </>
   );
 }

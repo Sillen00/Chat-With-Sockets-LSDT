@@ -5,11 +5,9 @@ import Chat from '../components/Chat';
 import { dm } from '../components/Dm';
 import Header from '../components/Header';
 import LeaveRoom from '../components/LeaveRoom';
-import Rooms, { allRooms } from '../components/Rooms';
+import { allRooms } from '../components/Rooms';
 
 function Lobby() {
-  const location = useLocation();
-  const { username } = location.state;
   const [showRooms, setShowRooms] = useState(true);
 
   const toggleRooms = () => {
@@ -24,7 +22,7 @@ function Lobby() {
           className='hide-on-mobile '
           style={{ backgroundColor: '#F0E6DC', height: '100%', padding: '1rem' }}
         >
-          <h3>{username}</h3>
+          <h3>username</h3>
           <div className='my-3'>
             <h4>{showRooms ? 'Rooms' : 'DM'}</h4>
           </div>
@@ -38,8 +36,8 @@ function Lobby() {
           </ButtonGroup>
           <div className='flex-grow-1'>
             {showRooms
-            // SOCKET.IO STUFF WILL GO HERE
-              ? allRooms.map(room => <div key={room.id}>{room.name}</div>)
+              ? // SOCKET.IO STUFF WILL GO HERE
+                allRooms.map(room => <div key={room.id}>{room.name}</div>)
               : dm.map(message => <div key={message.id}>{message.name}</div>)}
           </div>
         </div>
@@ -49,9 +47,9 @@ function Lobby() {
       </Col>
       <Col md={3} className='info-bar'>
         <h3>You are in room:</h3>
-          <div>
-            <LeaveRoom />
-          </div>
+        <div>
+          <LeaveRoom />
+        </div>
       </Col>
     </Row>
   );
