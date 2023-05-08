@@ -7,6 +7,7 @@ import chatterappLogo from '../assets/chatterapplogo.svg';
 import '../index.css';
 import { dm } from './Dm';
 import { allRooms } from './Rooms';
+import LeaveRoom from './LeaveRoom';
 
 function Header() {
   const [showRooms, setShowRooms] = useState(true);
