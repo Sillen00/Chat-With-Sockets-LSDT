@@ -16,6 +16,7 @@ function Lobby() {
   };
 
   return (
+
     <Row style={{ height: '100vh', margin: '0' }}>
       <Col md={3} style={{ padding: '0', borderRight: '2px solid black', overflow: 'hidden' }}>
         <Header />
@@ -25,36 +26,44 @@ function Lobby() {
           >
             <div className='my-3'>
               <h4>{showRooms ? 'Rooms' : 'DM'}</h4>
+
             </div>
-            <ButtonGroup aria-label='Buttongroup for room or DM'>
+            <ButtonGroup aria-label="Buttongroup for room or DM">
               <Button
-                variant={showRooms ? 'dark' : 'light'}
+                variant={showRooms ? "dark" : "light"}
                 onClick={toggleRooms}
               >
                 Rooms
               </Button>
               <Button
-                variant={!showRooms ? 'dark' : 'light'}
+                variant={!showRooms ? "dark" : "light"}
                 onClick={toggleRooms}
               >
                 DM
               </Button>
             </ButtonGroup>
-            <div className='flex-grow-1'>
+            <div className="flex-grow-1">
               {showRooms
-                ? allRooms.map((room) => <div key={room.id}>{room.name}</div>)
-                : dm.map((message) => <div key={message.id}>{message.name}</div>)}
+                ? allRooms.map((room) => (
+                    <div key={room.id}>{room.name}</div>
+                  ))
+                : dm.map((message) => (
+                    <div key={message.id}>{message.name}</div>
+                  ))}
             </div>
           </div>
+
       </Col>
       <Col xs={12} md={6} className="nopadding" >
                 <Chat />  
       </Col>
       <Col md={3} className="info-bar">
         <h3>Info of choosen room</h3>
+
       </Col>
     </Row>
   );
 }
+
 
 export default Lobby;
