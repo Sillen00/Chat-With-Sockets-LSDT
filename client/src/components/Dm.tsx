@@ -1,11 +1,9 @@
 import { useState } from 'react';
-import { Button } from 'react-bootstrap';
 
 // Detta skall vara en lista på alla DM's eller online users som finns
 export const dm = [
   {
-    name: 'Message From:',
-    id: '1',
+    name: 'Pelle',
   },
 ];
 
@@ -17,15 +15,12 @@ function DirectMessage() {
   };
 
   return (
-    <div>
-      <Button onClick={handleButtonClick}>DM's</Button>
-      {showList && (
-        <ul>
-          {dm.map(item => (
-            <li key={item.id}>{item.name}</li>
-          ))}
-        </ul>
-      )}
+    <div style={{ color: 'white' }}>
+      <ul>
+        {dm.map((item, i) => (
+          <li key={i}>{item.name}</li>
+        ))}
+      </ul>
     </div>
   );
 }

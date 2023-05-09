@@ -121,7 +121,7 @@ function Chat() {
                     width: '60%',
                     padding: '0.5rem',
                     fontSize: '1rem',
-                    borderRadius: '0.25rem',
+                    borderRadius: '0.25rem 0 0 0.25rem',
                     border: '1px solid #ced4da',
                   }}
                 />
