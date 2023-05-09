@@ -9,7 +9,7 @@ body {
   padding: 0;
   background-color: #eeeeee;
   font-family: 'Lexend';
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 ::-webkit-scrollbar {
@@ -29,9 +29,7 @@ body {
 }
 
 .login-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+
   height: 50vh;
   width: 40vh;
   background-color: #f0e6dc;
@@ -42,7 +40,7 @@ body {
 .lobby-row {
   height: calc(100vh - 64px); /* 64px is the height of the navbar */
   margin: 0;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 
@@ -59,16 +57,14 @@ body {
   justify-content: space-between;
 }
 
-.leave-room-btn {
-}
 
-.info-bar {
+/* .info-bar {
   background-color: #f0e6dc;
   border-left: 2px solid black;
   height: 100%;
   padding: 1rem;
   color: red;
-}
+} */
 
 .message-item {
   display: inline-block;
@@ -76,10 +72,10 @@ body {
   border: 1px solid black !important;
 }
 
-.nopadding {
+/* .nopadding {
   padding: 0 !important;
   overflow: hidden;
-}
+} */
 
 /* MEDIA QUERRIES */
 @media screen and (min-width: 768px) {
@@ -97,13 +93,13 @@ body {
     display: flex;
   }
   .chat-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: black;
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* justify-content: center; */
+    /* align-items: center; */
+    /* color: black; */
     height: 100vh;
-    width: 100%;
+    /* width: 100%; */
   }
 
   #custom-navbar-nav {

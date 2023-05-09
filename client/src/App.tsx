@@ -1,10 +1,10 @@
-import Lobby from './pages/Lobby';
+import Login from './pages/Login';
 
 function App() {
   // const { room } = useSocket();
   return (
     <>
-      <Lobby />
+      <Login />
     </>
   );
 }

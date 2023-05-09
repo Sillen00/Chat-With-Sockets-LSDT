@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import chatterappLogo from '../assets/chatterapplogo.svg';
+import { alignPropType } from 'react-bootstrap/esm/types';
 
 interface User {
   username: string;
@@ -16,9 +17,8 @@ export function LoginForm() {
     <div className='login-container'>
       <form
         onSubmit={handleSubmit}
-        className='d-flex flex-column justify-content-center align-items-center'
+        style={{display:"flex", flexDirection: "column", alignItems: "center", justifyContent:"center"}}
       >
-        <div className='form-group'>
           <img src={chatterappLogo} alt='logo' />
           <label htmlFor='username'>Username:</label>
           <input
@@ -28,7 +28,6 @@ export function LoginForm() {
             value={username}
             onChange={e => setUsername(e.target.value)}
           />
-        </div>
         <button
           type='submit'
           className='btn btn-primary mt-4'
