@@ -1,3 +1,5 @@
+import { createAdapter } from '@socket.io/mongo-adapter';
+import { MongoClient } from 'mongodb';
 import { Server } from 'socket.io';
 import type {
   ClientToServerEvents,
@@ -8,70 +10,137 @@ import type {
 
 const io = new Server<ClientToServerEvents, ServerToClientEvents, InterServerEvents, SocketData>();
 
-io.on('connection', socket => {
-  console.log('a user connected', socket.id);
+const DB = 'chatterapp';
+const COLLECTION = 'socket.io-adapter-events';
+const mongoClient = new MongoClient(
+  'mongodb+srv://nerd:nerduserATLAS@cluster0.pg7qeoa.mongodb.net/chatter/?retryWrites=true&w=majority'
+);
 
-  socket.on('join_lobby', (lobbyRoom: string, name: string, ack) => {
+const main = async () => {
+  await mongoClient.connect();
+
+  try {
+    await mongoClient.db(DB).createCollection(COLLECTION, {
+      capped: true,
+      size: 1e6,
+    });
+  } catch (e) {
+    // collection already exists
+  }
+
+  try {
+    await mongoClient.db(DB).createCollection('sessions')
+  } catch (error) {
+    // collection already exists
+  }
+
+  const adapterCollection = mongoClient.db(DB).collection(COLLECTION);
+  const sessionCollection = mongoClient.db(DB).collection<SocketData>('sessions');
+
+  io.adapter(createAdapter(adapterCollection));
+
+  io.use(async (socket, next) => {
+    const sessionID = socket.handshake.auth.sessionID;
+    if (sessionID) {
+      // find existing session Reconnect existing user
+      const session = await sessionCollection.findOne({ sessionID });
+      if (session) {
+        socket.data.sessionID = sessionID;
+        socket.data.userID = session.userID;
+        socket.data.name = session.name;
+        return next();
+      }
+    }
+    const name = socket.handshake.auth.name;
+    if (!name) {
+      return next(new Error('invalid name'));
+    }
+    // create new session for new user
+    socket.data.sessionID = Date.now().toString();
+    socket.data.userID = Date.now().toString();
     socket.data.name = name;
-    socket.join(lobbyRoom);
-    io.emit('rooms', getRooms());
-    ack();
+    await sessionCollection.insertOne(socket.data as SocketData);
+    next();
   });
 
-  socket.on('message', (room, message) => {
-    io.to(room).emit('message', socket.data.name!, message);
-    console.log(room, socket.data.name, message);
-  });
+// 
 
-  socket.on('join', (room, name, ack) => {
-    //socket.rooms
-    const { rooms } = io.sockets.adapter;
-    for (const [name, setOfSocketIds] of rooms) {
-      if (!setOfSocketIds.has(name)) {
-        socket.leave(name);
+  io.on('connection', socket => {
+    console.log('a user connected', socket.id);
+
+
+// socket.emit("session", {
+  // sessionID: socket.sessionID,
+  // userID: socket.userID,
+// });
+
+
+    socket.on('join_lobby', (lobbyRoom: string, name: string, ack) => {
+      socket.data.name = name;
+      socket.join(lobbyRoom);
+      io.emit('rooms', getRooms());
+      ack();
+    });
+
+    socket.on('message', (room, message) => {
+      io.to(room).emit('message', socket.data.name!, message);
+      console.log(room, socket.data.name, message);
+    });
+
+    socket.on('join', (room, name, ack) => {
+      //socket.rooms
+      const { rooms } = io.sockets.adapter;
+      for (const [name, setOfSocketIds] of rooms) {
+        if (!setOfSocketIds.has(name)) {
+          socket.leave(name);
+        }
       }
-    }
-    socket.join(room);
+      socket.join(room);
 
-    ack();
-    // When a user joins a room send an updated
-    // list of rooms to everyone
-    io.emit('rooms', getRooms());
-  });
+      ack();
+      // When a user joins a room send an updated
+      // list of rooms to everyone
+      io.emit('rooms', getRooms());
+    });
 
-  socket.on('leave', (room, ack) => {
-    console.log('Try to leave room: ' + room);
-    const { rooms } = io.sockets.adapter;
+    socket.on('leave', (room, ack) => {
+      console.log('Try to leave room: ' + room);
+      const { rooms } = io.sockets.adapter;
 
-    for (const [name, setOfSocketIds] of rooms) {
-      console.log(name);
-      if (name === room) {
-        socket.leave(room);
+      for (const [name, setOfSocketIds] of rooms) {
+        console.log(name);
+        if (name === room) {
+          socket.leave(room);
+        }
       }
-    }
-    socket.join('Lobby');
-    // console.log("Left room: " + room);
-    ack();
-    io.emit('rooms', getRooms());
+      socket.join('Lobby');
+      // console.log("Left room: " + room);
+      ack();
+      io.emit('rooms', getRooms());
+    });
+
+    socket.on('typing', (room: string) => {
+      const name = socket.data.name;
+      if (name) {
+        socket.to(room).emit('typing', name);
+      }
+    });
+
+    socket.on('stop_typing', () => {
+      const name = socket.data.name;
+      if (name) {
+        socket.broadcast.emit('stop_typing', name);
+      }
+    });
+
+    // When a new user connects send the list of rooms
+    socket.emit('rooms', getRooms());
   });
 
-  socket.on('typing', (room: string) => {
-    const name = socket.data.name;
-    if (name) {
-      socket.to(room).emit('typing', name);
-    }
-  });
+  io.listen(3000);
+};
 
-  socket.on('stop_typing', () => {
-    const name = socket.data.name;
-    if (name) {
-      socket.broadcast.emit('stop_typing', name);
-    }
-  });
-
-  // When a new user connects send the list of rooms
-  socket.emit('rooms', getRooms());
-});
+main();
 
 function getRooms() {
   const { rooms } = io.sockets.adapter;
@@ -89,6 +158,3 @@ function getRooms() {
 
   return roomsFound;
 }
-
-io.listen(3000);
-console.log('listening on port 3000');

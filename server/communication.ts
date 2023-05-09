@@ -20,6 +20,8 @@ export interface InterServerEvents {
 
 export interface SocketData {
   name: string;
+  sessionID: string;
+  userID: string;
 }
 
 export interface Message {

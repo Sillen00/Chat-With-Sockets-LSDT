@@ -1,6 +1,10 @@
 import { PropsWithChildren, createContext, useContext, useEffect, useState } from 'react';
-import { io } from 'socket.io-client';
-import type { Message } from '../../../server/communication';
+import { Socket, io } from 'socket.io-client';
+import type {
+  ClientToServerEvents,
+  Message,
+  ServerToClientEvents,
+} from '../../../server/communication';
 
 interface ContextValues {
   createUserAndJoinLobby: (name: string) => void;
@@ -16,7 +20,16 @@ interface ContextValues {
   stopTyping: () => void;
 }
 
-const socket = io();
+// socket.on("session", ({ sessionID, userID }) => {
+  // attach the session ID to the next reconnection attempts
+  // socket.auth = { sessionID };
+  // store it in the localStorage
+  // localStorage.setItem("sessionID", sessionID);
+  // save the ID of the user
+  // socket.userID = userID;
+// });
+
+const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io({autoConnect: false});
 
 const SocketContext = createContext<ContextValues>(null as any);
 export const useSocket = () => useContext(SocketContext);
@@ -28,8 +41,27 @@ function SocketProvider({ children }: PropsWithChildren) {
   const [name, setName] = useState<string>();
   const [typingName, setTypingName] = useState<string>();
 
+
+
+
   const createUserAndJoinLobby = (name: string) => {
+    // created() {
+  // const sessionID = localStorage.getItem("sessionID");
+
+  // if (sessionID) {
+    // this.usernameAlreadySelected = true;
+    // socket.auth = { sessionID };
+    // socket.connect();
+  // }
+  // ...
+// }
     const lobbyRoom = 'Lobby';
+
+
+
+    socket.auth = {name}
+    socket.connect();
+
     socket.emit('join_lobby', lobbyRoom, name, () => {
       setRoom(lobbyRoom);
       setName(name);
@@ -39,7 +71,7 @@ function SocketProvider({ children }: PropsWithChildren) {
   const joinRoom = (room: string) => {
     setMessages([]);
     if (room.length > 2) {
-      socket.emit('join', room, name, () => {
+      socket.emit('join', room, name!, () => {
         setRoom(room);
       });
     } else {
@@ -50,7 +82,7 @@ function SocketProvider({ children }: PropsWithChildren) {
   const leaveRoom = () => {
     setMessages([]);
     const lobbyRoom = 'Lobby';
-    socket.emit('leave', room, () => {
+    socket.emit('leave', room!, () => {
       setRoom(lobbyRoom);
     });
   };
@@ -65,7 +97,7 @@ function SocketProvider({ children }: PropsWithChildren) {
   };
 
   const isTyping = () => {
-    socket.emit('typing', room);
+    socket.emit('typing', room!);
   };
 
   const stopTyping = () => {
