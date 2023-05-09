@@ -1,6 +1,10 @@
 import { PropsWithChildren, createContext, useContext, useEffect, useState } from 'react';
-import { io } from 'socket.io-client';
-import type { Message } from '../../../server/communication';
+import { Socket, io } from 'socket.io-client';
+import type {
+  ClientToServerEvents,
+  Message,
+  ServerToClientEvents,
+} from '../../../server/communication';
 
 interface ContextValues {
   createUserAndJoinLobby: (name: string) => void;
@@ -16,7 +20,7 @@ interface ContextValues {
   stopTyping: () => void;
 }
 
-const socket = io();
+const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io();
 
 const SocketContext = createContext<ContextValues>(null as any);
 export const useSocket = () => useContext(SocketContext);
@@ -39,7 +43,7 @@ function SocketProvider({ children }: PropsWithChildren) {
   const joinRoom = (room: string) => {
     setMessages([]);
     if (room.length > 2) {
-      socket.emit('join', room, name, () => {
+      socket.emit('join', room, name!, () => {
         setRoom(room);
       });
     } else {
@@ -50,7 +54,7 @@ function SocketProvider({ children }: PropsWithChildren) {
   const leaveRoom = () => {
     setMessages([]);
     const lobbyRoom = 'Lobby';
-    socket.emit('leave', room, () => {
+    socket.emit('leave', room!, () => {
       setRoom(lobbyRoom);
     });
   };
@@ -65,7 +69,7 @@ function SocketProvider({ children }: PropsWithChildren) {
   };
 
   const isTyping = () => {
-    socket.emit('typing', room);
+    socket.emit('typing', room!);
   };
 
   const stopTyping = () => {
