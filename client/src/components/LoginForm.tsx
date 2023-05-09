@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 import chatterappLogo from '../assets/chatterapplogo.svg';
 import { useSocket } from '../context/SocketContext';
 
@@ -24,9 +24,8 @@ export function LoginForm() {
     <div className='login-container'>
       <form
         onSubmit={handleSubmit}
-        className='d-flex flex-column justify-content-center align-items-center'
+        className='d-flex flex-column'
       >
-        <div className='form-group'>
           <img src={chatterappLogo} alt='logo' />
           <label htmlFor='username'>Username:</label>
           <input
@@ -36,14 +35,12 @@ export function LoginForm() {
             value={name}
             onChange={e => setName(e.target.value)}
           />
-        </div>
-        <button
+        <Button
           type='submit'
-          className='btn btn-primary mt-4'
-          style={{ margin: '1rem', backgroundColor: '#710193 color: #fff' }}
+          style={{ backgroundColor: '#710193 color: #fff' }}
         >
           Join Chat
-        </button>
+        </Button>
       </form>
     </div>
   );

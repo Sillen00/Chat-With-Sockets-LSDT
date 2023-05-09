@@ -37,6 +37,8 @@ body {
   background-color: #f0e6dc;
   border-radius: 10px;
   border: 1px solid black !important;
+  padding: 10rem;
+
 }
 
 .lobby-row {
@@ -127,10 +129,7 @@ body {
   }
  
 
-  .login-container {
-    height: auto;
-    padding: 1rem;
-  }
+
   #custom-navbar {
    position: fixed;
    display: flex;
