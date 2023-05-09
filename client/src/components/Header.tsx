@@ -34,7 +34,7 @@ function Header() {
               placement='end'
             >
               <Offcanvas.Header closeButton>
-                <Offcanvas.Title id='offcanvasNavbarLabel-expand-lg'>Offcanvas</Offcanvas.Title>
+                <Offcanvas.Title id='offcanvasNavbarLabel-expand-lg'>username here</Offcanvas.Title>
               </Offcanvas.Header>
               <Offcanvas.Body>
                 <Nav

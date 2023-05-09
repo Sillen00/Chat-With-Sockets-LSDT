@@ -104,7 +104,7 @@ function Chat() {
           <Col className='send-message-mobile'>
             {/* SHOWS WHO'S TYPING */}
             {typingName ? <div>{typingName} is typing...</div> : null}
-
+  
             <Form onSubmit={handleSubmit}>
               <InputGroup style={{ display: 'flex', gap: '1rem', marginBottom: '1rem' }}>
                 <input
@@ -116,8 +116,18 @@ function Chat() {
                     handleTyping(e);
                     setMessage(e.target.value);
                   }}
+                  style={{
+                    flex: '1 1 auto',
+                    width: '60%',
+                    padding: '0.5rem',
+                    fontSize: '1rem',
+                    borderRadius: '0.25rem',
+                    border: '1px solid #ced4da',
+                  }}
                 />
-                <Button type='submit'>Send</Button>
+                <Button type='submit' style={{ flex: '0 0 auto', minWidth: '6rem', width: '20%' }}>
+                  Send
+                </Button>
               </InputGroup>
             </Form>
           </Col>
@@ -125,6 +135,8 @@ function Chat() {
       </Container>
     </div>
   );
-}
+
+                };
+  
 
 export default Chat;
