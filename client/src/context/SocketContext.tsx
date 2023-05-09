@@ -20,7 +20,7 @@ interface ContextValues {
   stopTyping: () => void;
 }
 
-const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io();
+const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io({autoConnect: false});
 
 const SocketContext = createContext<ContextValues>(null as any);
 export const useSocket = () => useContext(SocketContext);
@@ -34,6 +34,10 @@ function SocketProvider({ children }: PropsWithChildren) {
 
   const createUserAndJoinLobby = (name: string) => {
     const lobbyRoom = 'Lobby';
+
+    socket.auth = {name}
+    socket.connect();
+
     socket.emit('join_lobby', lobbyRoom, name, () => {
       setRoom(lobbyRoom);
       setName(name);
