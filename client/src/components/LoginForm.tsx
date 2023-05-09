@@ -1,25 +1,26 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useSocket } from '../context/SocketContext';
 import chatterappLogo from '../assets/chatterapplogo.svg';
+import { useSocket } from '../context/SocketContext';
 
 interface User {
   username: string;
 }
 
 export function LoginForm() {
-  const [username, setUsername] = useState('');
-  const { socket } = useSocket();
+  // const [username, setUsername] = useState('');
+  const [name, setName] = useState('');
+
+  const { createUserAndJoinLobby } = useSocket();
+
+  // const { socket } = useSocket();
   const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (username.trim() === '') {
-      return;
-    }
-    const user: User = { username };
-    socket.emit('join', user);
-    navigate('/chat', { state: { username } });
+    createUserAndJoinLobby(name);
+
+    navigate('/chat');
   };
 
   return (
@@ -32,11 +33,11 @@ export function LoginForm() {
           <img src={chatterappLogo} alt='logo' />
           <label htmlFor='username'>Username:</label>
           <input
+            name='Name'
+            placeholder='Name'
             type='text'
-            className='form-control'
-            id='username'
-            value={username}
-            onChange={e => setUsername(e.target.value)}
+            value={name}
+            onChange={e => setName(e.target.value)}
           />
         </div>
         <button

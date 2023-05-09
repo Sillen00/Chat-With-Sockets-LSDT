@@ -1,6 +1,4 @@
-import { useState } from 'react';
-import { Button } from 'react-bootstrap';
-
+import { useSocket } from '../context/SocketContext';
 
 // Detta skall vara en lista på alla rum som finns
 export const allRooms = [
@@ -15,25 +13,38 @@ export const allRooms = [
 ];
 
 function Rooms() {
-  const [showList, setShowList] = useState(false);
+  const { rooms, joinRoom } = useSocket();
 
-  const handleButtonClick = () => {
-    setShowList(!showList);
+  // const [showList, setShowList] = useState(false);
+
+  // const handleButtonClick = () => {
+  //   setShowList(!showList);
+  // };
+
+  const joinExistingRoom = (room: string) => {
+    joinRoom(room);
   };
 
   return (
     <div>
-      <Button onClick={handleButtonClick}>Rooms</Button>
-      {showList && (
-        <ul>
-          <div style={{border: '2px solid black', background: ''}}>
-          {allRooms.map(item => (
-            <li key={item.id}>{item.name}</li>
-          ))}
-
-        </div>
-        </ul>
-      )}
+      <ul
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          listStyleType: 'none',
+          gap: '1rem',
+        }}
+      >
+        {rooms?.map((room, i) => (
+          <li
+            onClick={() => joinExistingRoom(room)}
+            style={{ border: '1px solid green', padding: '0.5rem' }}
+            key={i}
+          >
+            {room}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
