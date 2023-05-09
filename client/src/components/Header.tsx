@@ -26,13 +26,13 @@ function Header() {
           <div>
             <Navbar.Toggle aria-controls='offcanvasNavbar-expand-lg' />
             <Navbar.Offcanvas
-              style={{ backgroundColor: '#F0E6DC' }}
+              style={{ backgroundColor: '#1B4866' }}
               id='offcanvasNavbar-expand-lg'
               aria-labelledby='offcanvasNavbarLabel-expand-lg'
               placement='end'
             >
               <Offcanvas.Header closeButton>
-                <Offcanvas.Title id='offcanvasNavbarLabel-expand-lg'>Offcanvas</Offcanvas.Title>
+                <Offcanvas.Title id='offcanvasNavbarLabel-expand-lg'>username here</Offcanvas.Title>
               </Offcanvas.Header>
               <Offcanvas.Body>
                 <Nav
