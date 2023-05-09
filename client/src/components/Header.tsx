@@ -1,14 +1,12 @@
 import { useState } from 'react';
-import { Button, ButtonGroup, Nav } from 'react-bootstrap';
+import { Nav } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import chatterappLogo from '../assets/chatterapplogo.svg';
 import '../index.css';
-import { dm } from './Dm';
-import LeaveRoom from './LeaveRoom';
-import { allRooms } from './Rooms';
 import ButtonGroupToggle from './ButtonGroupToggle';
+import LeaveRoom from './LeaveRoom';
 
 function Header() {
   const [showRooms, setShowRooms] = useState(true);
@@ -40,7 +38,7 @@ function Header() {
                 <Nav
                   id='offcanvas-content'
                   className='justify-content-end flex-grow-1 pe-3 '
-                  style={{ display: 'flex', gap: '1rem' }}
+                  style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}
                 >
                   <ButtonGroupToggle />
                   <div className='leave-room-btn'>

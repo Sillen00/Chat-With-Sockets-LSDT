@@ -30,7 +30,6 @@ function Rooms() {
           gap: '.5rem',
           margin: '0',
           padding: '0',
-          // border: '2px solid black',
           textTransform: 'uppercase',
         }}
       >
