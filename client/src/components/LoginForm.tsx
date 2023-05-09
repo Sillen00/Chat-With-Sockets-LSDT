@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 import chatterappLogo from '../assets/chatterapplogo.svg';
 import { useSocket } from '../context/SocketContext';
 
@@ -14,23 +14,17 @@ export function LoginForm() {
   const { createUserAndJoinLobby } = useSocket();
 
   // const { socket } = useSocket();
-  const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     createUserAndJoinLobby(name);
-
-    navigate('/chat');
   };
 
   return (
     <div className='login-container'>
-      <form
-        onSubmit={handleSubmit}
-        className='d-flex flex-column justify-content-center align-items-center'
-      >
-        <div className='form-group'>
-          <img src={chatterappLogo} alt='logo' />
+      <form onSubmit={handleSubmit} className='d-flex flex-column gap-3'>
+        <img src={chatterappLogo} alt='logo' />
+        <div>
           <label htmlFor='username'>Username:</label>
           <input
             name='Name'
@@ -40,13 +34,9 @@ export function LoginForm() {
             onChange={e => setName(e.target.value)}
           />
         </div>
-        <button
-          type='submit'
-          className='btn btn-primary mt-4'
-          style={{ margin: '1rem', backgroundColor: '#710193 color: #fff' }}
-        >
+        <Button type='submit' style={{ backgroundColor: '#710193 color: #fff' }}>
           Join Chat
-        </button>
+        </Button>
       </form>
     </div>
   );

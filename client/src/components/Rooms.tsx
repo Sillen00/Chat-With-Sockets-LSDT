@@ -31,6 +31,7 @@ function Rooms() {
           margin: '0',
           padding: '0',
           textTransform: 'uppercase',
+          color: "white",
         }}
       >
         {/* CREATED ROOMS */}
