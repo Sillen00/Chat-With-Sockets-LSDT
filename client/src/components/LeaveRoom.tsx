@@ -16,7 +16,7 @@ function LeaveRoom() {
 
   return (
     <div>
-      <Button variant='secondary' onClick={handleLeaveRoom}>
+      <Button variant='primary' onClick={handleLeaveRoom}>
         Leave room
       </Button>
     </div>
