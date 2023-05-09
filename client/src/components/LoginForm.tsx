@@ -14,13 +14,10 @@ export function LoginForm() {
   const { createUserAndJoinLobby } = useSocket();
 
   // const { socket } = useSocket();
-  const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     createUserAndJoinLobby(name);
-
-    navigate('/chat');
   };
 
   return (
