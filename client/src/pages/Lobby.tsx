@@ -1,16 +1,19 @@
 import { useState } from 'react';
 import { Button, ButtonGroup, Col, Row } from 'react-bootstrap';
-import { useLocation } from 'react-router-dom';
 import Chat from '../components/Chat';
-import { dm } from '../components/Dm';
+import CreateARoom from '../components/CreateARoom';
 import Header from '../components/Header';
 import LeaveRoom from '../components/LeaveRoom';
-import Rooms, { allRooms } from '../components/Rooms';
+import Rooms from '../components/Rooms';
+import { useSocket } from '../context/SocketContext';
 
 function Lobby() {
-  const location = useLocation();
-  const { username } = location.state;
+  // const location = useLocation();
+  // const { username } = location.state;
+
   const [showRooms, setShowRooms] = useState(true);
+
+  const { room, messages, joinRoom, leaveRoom, name } = useSocket();
 
   const toggleRooms = () => {
     setShowRooms(!showRooms);
@@ -24,10 +27,7 @@ function Lobby() {
           className='hide-on-mobile '
           style={{ backgroundColor: '#F0E6DC', height: '100%', padding: '1rem' }}
         >
-          <h3>{username}</h3>
-          <div className='my-3'>
-            <h4>{showRooms ? 'Rooms' : 'DM'}</h4>
-          </div>
+          <h3>{name}</h3>
           <ButtonGroup aria-label='Buttongroup for room or DM'>
             <Button variant={showRooms ? 'dark' : 'light'} onClick={toggleRooms}>
               Rooms
@@ -37,21 +37,26 @@ function Lobby() {
             </Button>
           </ButtonGroup>
           <div className='flex-grow-1'>
-            {showRooms
-            // SOCKET.IO STUFF WILL GO HERE
-              ? allRooms.map(room => <div key={room.id}>{room.name}</div>)
-              : dm.map(message => <div key={message.id}>{message.name}</div>)}
+            {showRooms ? (
+              // SOCKET.IO STUFF WILL GO HERE
+              // allRooms.map(room => <div key={room.id}>{room.name}</div>)
+              <Rooms />
+            ) : (
+              <p>DM - users online</p>
+            )}
           </div>
+          <CreateARoom />
+          <p>hej</p>
         </div>
       </Col>
       <Col xs={12} md={6} className='nopadding'>
         <Chat />
       </Col>
       <Col md={3} className='info-bar'>
-        <h3>You are in room:</h3>
-          <div>
-            <LeaveRoom />
-          </div>
+        <h3>You are in room: {room}</h3>
+        <div>
+          <LeaveRoom />
+        </div>
       </Col>
     </Row>
   );
