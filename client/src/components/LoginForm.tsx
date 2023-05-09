@@ -22,11 +22,9 @@ export function LoginForm() {
 
   return (
     <div className='login-container'>
-      <form
-        onSubmit={handleSubmit}
-        className='d-flex flex-column'
-      >
-          <img src={chatterappLogo} alt='logo' />
+      <form onSubmit={handleSubmit} className='d-flex flex-column gap-3'>
+        <img src={chatterappLogo} alt='logo' />
+        <div>
           <label htmlFor='username'>Username:</label>
           <input
             name='Name'
@@ -35,10 +33,8 @@ export function LoginForm() {
             value={name}
             onChange={e => setName(e.target.value)}
           />
-        <Button
-          type='submit'
-          style={{ backgroundColor: '#710193 color: #fff' }}
-        >
+        </div>
+        <Button type='submit' style={{ backgroundColor: '#710193 color: #fff' }}>
           Join Chat
         </Button>
       </form>
