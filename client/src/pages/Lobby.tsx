@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { Button, ButtonGroup, Col, Row } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
+import ButtonGroupToggle from '../components/ButtonGroupToggle';
 import Chat from '../components/Chat';
 import CreateARoom from '../components/CreateARoom';
 import Header from '../components/Header';
 import LeaveRoom from '../components/LeaveRoom';
-import Rooms from '../components/Rooms';
 import { useSocket } from '../context/SocketContext';
 
 function Lobby() {
@@ -27,24 +27,7 @@ function Lobby() {
           className='hide-on-mobile '
           style={{ backgroundColor: '#F0E6DC', height: '100%', padding: '1rem' }}
         >
-          <h3>{name}</h3>
-          <ButtonGroup aria-label='Buttongroup for room or DM'>
-            <Button variant={showRooms ? 'dark' : 'light'} onClick={toggleRooms}>
-              Rooms
-            </Button>
-            <Button variant={!showRooms ? 'dark' : 'light'} onClick={toggleRooms}>
-              DM
-            </Button>
-          </ButtonGroup>
-          <div className='flex-grow-1'>
-            {showRooms ? (
-              // SOCKET.IO STUFF WILL GO HERE
-              // allRooms.map(room => <div key={room.id}>{room.name}</div>)
-              <Rooms />
-            ) : (
-              <p>DM - users online</p>
-            )}
-          </div>
+          <ButtonGroupToggle />
           <CreateARoom />
           <p>hej</p>
         </div>
