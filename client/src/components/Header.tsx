@@ -8,6 +8,7 @@ import '../index.css';
 import { dm } from './Dm';
 import LeaveRoom from './LeaveRoom';
 import { allRooms } from './Rooms';
+import ButtonGroupToggle from './ButtonGroupToggle';
 
 function Header() {
   const [showRooms, setShowRooms] = useState(true);
@@ -41,19 +42,7 @@ function Header() {
                   className='justify-content-end flex-grow-1 pe-3 '
                   style={{ display: 'flex', gap: '1rem' }}
                 >
-                  <ButtonGroup aria-label='Buttongroup for room or DM'>
-                    <Button variant={showRooms ? 'dark' : 'light'} onClick={toggleRooms}>
-                      Rooms
-                    </Button>
-                    <Button variant={!showRooms ? 'dark' : 'light'} onClick={toggleRooms}>
-                      DM
-                    </Button>
-                  </ButtonGroup>
-                  <div>
-                    {showRooms
-                      ? allRooms.map(room => <div key={room.id}>{room.name}</div>)
-                      : dm.map(message => <div key={message.id}>{message.name}</div>)}
-                  </div>
+                  <ButtonGroupToggle />
                   <div className='leave-room-btn'>
                     <LeaveRoom />
                   </div>
