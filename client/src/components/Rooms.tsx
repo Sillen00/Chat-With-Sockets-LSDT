@@ -15,34 +15,60 @@ export const allRooms = [
 function Rooms() {
   const { rooms, joinRoom } = useSocket();
 
-  // const [showList, setShowList] = useState(false);
-
-  // const handleButtonClick = () => {
-  //   setShowList(!showList);
-  // };
-
   const joinExistingRoom = (room: string) => {
     joinRoom(room);
   };
 
   return (
     <div>
+      {/* CHAT ROOM */}
       <ul
         style={{
           display: 'flex',
-          flexDirection: 'row',
+          flexDirection: 'column',
           listStyleType: 'none',
-          gap: '1rem',
+          gap: '.5rem',
+          margin: '0',
+          padding: '0',
+          // border: '2px solid black',
+          textTransform: 'uppercase',
         }}
       >
+        {/* CREATED ROOMS */}
         {rooms?.map((room, i) => (
-          <li
-            onClick={() => joinExistingRoom(room)}
-            style={{ border: '1px solid green', padding: '0.5rem' }}
-            key={i}
-          >
-            {room}
-          </li>
+          <div>
+            <li
+              onClick={() => joinExistingRoom(room)}
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                fontSize: '1.5rem',
+                cursor: 'pointer',
+              }}
+              key={i}
+            >
+              {room}
+              {/* USERS IN CHAT ROOM */}
+            </li>
+            <ul
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                flexDirection: 'column',
+                listStyleType: 'none',
+                gap: '.5rem',
+                margin: '0',
+                padding: '0',
+                textTransform: 'none',
+              }}
+            >
+              <li>User</li>
+              <li>User</li>
+              <li>User</li>
+            </ul>
+          </div>
         ))}
       </ul>
     </div>
