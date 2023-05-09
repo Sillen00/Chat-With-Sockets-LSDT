@@ -25,11 +25,11 @@ function Lobby() {
         <Header />
         <div
           className='hide-on-mobile '
-          style={{ backgroundColor: '#1B4866', height: '100%', padding: '1rem' }}
+          style={{ backgroundColor: '#1B4866', height: '100%', padding: '1rem', alignItems: "center" }}
+
         >
           <ButtonGroupToggle />
           <CreateARoom />
-          <p>hej</p>
         </div>
       </Col>
       <Col xs={12} md={6} className='nopadding'>

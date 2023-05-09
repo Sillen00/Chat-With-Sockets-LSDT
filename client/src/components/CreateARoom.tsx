@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Button } from 'react-bootstrap';
+
+import { Button, Form } from 'react-bootstrap';
 import { useSocket } from '../context/SocketContext';
 
 function CreateARoom() {
@@ -17,17 +18,28 @@ function CreateARoom() {
   };
   return (
     <div>
-      <form onSubmit={handleCreateAndJoinRoom}>
-        <input
-          type='text'
-          name='createdRoom'
-          value={createdRoom}
-          onChange={e => setCreatedRoom(e.target.value)}
-        />
-        <Button variant="primary" type='submit'>Create and join room</Button>
-      </form>
+
+      <Form
+        style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: '1rem' }}
+        onSubmit={handleCreateAndJoinRoom}
+      >
+        <Form.Group controlId='formBasicEmail'>
+          <Form.Control
+            type='text'
+            name='createdRoom'
+            placeholder='Name of room'
+            value={createdRoom}
+            onChange={e => setCreatedRoom(e.target.value)}
+          />
+        </Form.Group>
+        <Button variant='primary' type='submit'>
+          Create and join room
+        </Button>
+      </Form>
     </div>
   );
 }
+
+// create the return form above but with react bootstrap
 
 export default CreateARoom;

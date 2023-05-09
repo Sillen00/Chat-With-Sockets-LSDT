@@ -52,6 +52,7 @@ body {
   height: 64px;
   width: 100%;
   border-bottom: 1px solid black;
+
 }
 .hide-on-mobile {
   display: flex;
@@ -93,7 +94,7 @@ body {
   #custom-navbar {
     padding: 0;
     margin: 0;
-    display: flex;
+    display: none;
   }
   .chat-container {
     display: flex;
@@ -133,6 +134,8 @@ body {
   }
   #custom-navbar {
    position: fixed;
+   display: flex;
+   
    
   }
   .msg-list-group {
