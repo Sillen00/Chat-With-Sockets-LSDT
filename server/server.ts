@@ -27,12 +27,53 @@ const main = async () => {
   } catch (e) {
     // collection already exists
   }
-  const mongoCollection = mongoClient.db(DB).collection(COLLECTION);
 
-  io.adapter(createAdapter(mongoCollection));
+  try {
+    await mongoClient.db(DB).createCollection('sessions')
+  } catch (error) {
+    // collection already exists
+  }
+
+  const adapterCollection = mongoClient.db(DB).collection(COLLECTION);
+  const sessionCollection = mongoClient.db(DB).collection<SocketData>('sessions');
+
+  io.adapter(createAdapter(adapterCollection));
+
+  io.use(async (socket, next) => {
+    const sessionID = socket.handshake.auth.sessionID;
+    if (sessionID) {
+      // find existing session Reconnect existing user
+      const session = await sessionCollection.findOne({ sessionID });
+      if (session) {
+        socket.data.sessionID = sessionID;
+        socket.data.userID = session.userID;
+        socket.data.name = session.name;
+        return next();
+      }
+    }
+    const name = socket.handshake.auth.name;
+    if (!name) {
+      return next(new Error('invalid name'));
+    }
+    // create new session for new user
+    socket.data.sessionID = Date.now().toString();
+    socket.data.userID = Date.now().toString();
+    socket.data.name = name;
+    await sessionCollection.insertOne(socket.data as SocketData);
+    next();
+  });
+
+// 
 
   io.on('connection', socket => {
     console.log('a user connected', socket.id);
+
+
+// socket.emit("session", {
+  // sessionID: socket.sessionID,
+  // userID: socket.userID,
+// });
+
 
     socket.on('join_lobby', (lobbyRoom: string, name: string, ack) => {
       socket.data.name = name;
