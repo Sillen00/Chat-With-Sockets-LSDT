@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Button } from 'react-bootstrap';
 import { useSocket } from '../context/SocketContext';
 
 function CreateARoom() {
@@ -23,7 +24,7 @@ function CreateARoom() {
           value={createdRoom}
           onChange={e => setCreatedRoom(e.target.value)}
         />
-        <button type='submit'>Create and join room</button>
+        <Button variant="primary" type='submit'>Create and join room</Button>
       </form>
     </div>
   );

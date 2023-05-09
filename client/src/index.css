@@ -34,7 +34,7 @@ body {
   align-items: center;
   height: 50vh;
   width: 40vh;
-  background-color: #f0e6dc;
+  background-color: #1B4866;
   border-radius: 10px;
   border: 1px solid black !important;
 }
@@ -47,10 +47,11 @@ body {
 
 
 #custom-navbar {
-  background: #f0e6dc;
+  background: #1B4866;
   position: relative;
   height: 64px;
   width: 100%;
+  border-bottom: 1px solid black;
 }
 .hide-on-mobile {
   display: flex;
@@ -61,7 +62,7 @@ body {
 
 
 .info-bar {
-  background-color: #f0e6dc;
+  background-color: #1B4866;
   border-left: 2px solid black;
   height: 100%;
   padding: 1rem;

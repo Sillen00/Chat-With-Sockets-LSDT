@@ -28,7 +28,7 @@ function Header() {
           <div>
             <Navbar.Toggle aria-controls='offcanvasNavbar-expand-lg' />
             <Navbar.Offcanvas
-              style={{ backgroundColor: '#F0E6DC' }}
+              style={{ backgroundColor: '#1B4866' }}
               id='offcanvasNavbar-expand-lg'
               aria-labelledby='offcanvasNavbarLabel-expand-lg'
               placement='end'

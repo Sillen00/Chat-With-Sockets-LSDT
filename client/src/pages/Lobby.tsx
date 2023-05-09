@@ -25,7 +25,7 @@ function Lobby() {
         <Header />
         <div
           className='hide-on-mobile '
-          style={{ backgroundColor: '#F0E6DC', height: '100%', padding: '1rem' }}
+          style={{ backgroundColor: '#1B4866', height: '100%', padding: '1rem' }}
         >
           <ButtonGroupToggle />
           <CreateARoom />
