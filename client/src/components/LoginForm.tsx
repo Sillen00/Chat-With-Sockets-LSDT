@@ -23,10 +23,11 @@ export function LoginForm() {
   return (
     <div className='login-container'>
       <form onSubmit={handleSubmit} className='d-flex flex-column gap-3'>
-        <img src={chatterappLogo} style={{width: "15rem", marginBottom:"2rem"}} alt='logo' />
+        <img src={chatterappLogo} style={{ width: '15rem', marginBottom: '2rem' }} alt='logo' />
         <div>
           <label htmlFor='username'>Username:</label>
           <input
+            style={{ width: '100%' }}
             name='Name'
             placeholder='Name'
             type='text'
