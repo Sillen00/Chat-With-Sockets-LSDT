@@ -38,7 +38,7 @@ function SocketProvider({ children }: PropsWithChildren) {
   const [userId, setUserId] = useState<string>();
 
   useEffect(() => {
-    let sessionID = sessionStorage.getItem('sessionID');
+    const sessionID = sessionStorage.getItem('sessionID');
 
     if (sessionID) {
       const lobbyRoom = 'Lobby';
@@ -60,15 +60,14 @@ function SocketProvider({ children }: PropsWithChildren) {
     setName(name);
 
     socket.emit('join_lobby', lobbyRoom);
-    let sessionID = sessionStorage.getItem('sessionID');
-    if (sessionID) {
-      setSessionId(sessionID);
-    }
     // let usernameAlreadySelected = false;
-
+    
     // }
+    setSessionId('999');
+
     socket.auth = { name };
     socket.connect();
+    
 
     //  sessionStorage.setItem('sessionID', (socket.auth as { sessionID: string }).sessionID);
   };
