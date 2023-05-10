@@ -3,11 +3,12 @@ export interface ServerToClientEvents {
   rooms: (rooms: string[]) => void;
   typing: (name: string) => void;
   stop_typing: (name: string) => void;
+  session: (session: SocketData) => void;
 }
 
 export interface ClientToServerEvents {
   message: (room: string, message: string) => void;
-  join_lobby: (room: string, name: string, ack: () => void) => void;
+  join_lobby: (room: string) => void;
   join: (room: string, name: string, ack: () => void) => void;
   leave: (room: string, ack: () => void) => void;
   typing: (room: string) => void;
@@ -19,9 +20,9 @@ export interface InterServerEvents {
 }
 
 export interface SocketData {
-  name: string;
-  sessionID: string;
-  userID: string;
+  name?: string;
+  sessionID?: string;
+  userID?: string;
 }
 
 export interface Message {
