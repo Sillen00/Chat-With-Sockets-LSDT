@@ -34,7 +34,7 @@ function Rooms() {
       >
         {/* CREATED ROOMS */}
         {rooms?.map((room, i) => (
-          <div>
+          <>
             <li
               onClick={() => joinExistingRoom(room)}
               style={{
@@ -66,7 +66,7 @@ function Rooms() {
               <li>User</li>
               <li>User</li>
             </ul>
-          </div>
+          </>
         ))}
       </ul>
     </div>
