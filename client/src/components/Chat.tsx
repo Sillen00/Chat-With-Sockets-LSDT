@@ -26,9 +26,15 @@ function Chat() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    
+    if (message.trim().length === 0) {
+      return;
+    }
+  
     sendMessage(message);
     setMessage('');
   };
+  
 
   // const [chatText, setChatText] = useState('');
   // const [messages, setMessages] = useState<Message[]>([]);
