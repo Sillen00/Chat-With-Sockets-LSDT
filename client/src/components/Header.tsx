@@ -3,13 +3,15 @@ import { Nav } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import Offcanvas from 'react-bootstrap/Offcanvas';
-import chatterappLogo from '../assets/chatterapplogo.svg';
+import chatterappLogo from '../assets/logoChat.png';
+import { useSocket } from '../context/SocketContext';
 import '../index.css';
 import ButtonGroupToggle from './ButtonGroupToggle';
 import LeaveRoom from './LeaveRoom';
 
 function Header() {
   const [showRooms, setShowRooms] = useState(true);
+  const { name } = useSocket();
 
   const toggleRooms = () => {
     setShowRooms(!showRooms);
@@ -24,15 +26,18 @@ function Header() {
           </div>
 
           <div>
-            <Navbar.Toggle aria-controls='offcanvasNavbar-expand-lg' />
+            <Navbar.Toggle
+              aria-controls='offcanvasNavbar-expand-lg'
+              style={{ background: '#ad7055' }}
+            />
             <Navbar.Offcanvas
-              style={{ backgroundColor: '#1B4866' }}
+              style={{ backgroundColor: '#1B4866', color: 'white' }}
               id='offcanvasNavbar-expand-lg'
               aria-labelledby='offcanvasNavbarLabel-expand-lg'
               placement='end'
             >
               <Offcanvas.Header closeButton>
-                <Offcanvas.Title id='offcanvasNavbarLabel-expand-lg'>username here</Offcanvas.Title>
+                <Offcanvas.Title id='offcanvasNavbarLabel-expand-lg'>{name}</Offcanvas.Title>
               </Offcanvas.Header>
               <Offcanvas.Body>
                 <Nav
