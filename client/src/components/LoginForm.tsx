@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Button } from 'react-bootstrap';
-import chatterappLogo from '../assets/chatterapplogo.svg';
+import chatterappLogo from '../assets/logoChat.png';
 import { useSocket } from '../context/SocketContext';
 
 interface User {
@@ -23,7 +23,7 @@ export function LoginForm() {
   return (
     <div className='login-container'>
       <form onSubmit={handleSubmit} className='d-flex flex-column gap-3'>
-        <img src={chatterappLogo} alt='logo' />
+        <img src={chatterappLogo} style={{width: "15rem", marginBottom:"2rem"}} alt='logo' />
         <div>
           <label htmlFor='username'>Username:</label>
           <input
