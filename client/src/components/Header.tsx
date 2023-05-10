@@ -4,12 +4,14 @@ import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import chatterappLogo from '../assets/chatterapplogo.svg';
+import { useSocket } from '../context/SocketContext';
 import '../index.css';
 import ButtonGroupToggle from './ButtonGroupToggle';
 import LeaveRoom from './LeaveRoom';
 
 function Header() {
   const [showRooms, setShowRooms] = useState(true);
+  const { name } = useSocket();
 
   const toggleRooms = () => {
     setShowRooms(!showRooms);
@@ -32,7 +34,7 @@ function Header() {
               placement='end'
             >
               <Offcanvas.Header closeButton>
-                <Offcanvas.Title id='offcanvasNavbarLabel-expand-lg'>username here</Offcanvas.Title>
+                <Offcanvas.Title id='offcanvasNavbarLabel-expand-lg'>{name}</Offcanvas.Title>
               </Offcanvas.Header>
               <Offcanvas.Body>
                 <Nav

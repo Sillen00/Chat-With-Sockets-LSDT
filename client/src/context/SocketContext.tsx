@@ -19,7 +19,7 @@ interface ContextValues {
   isTyping: () => void;
   typingName?: string;
   stopTyping: () => void;
-  // sessionID?: string;
+  sessionId?: string;
   userId?: string;
 }
 
@@ -34,35 +34,44 @@ function SocketProvider({ children }: PropsWithChildren) {
   const [rooms, setRooms] = useState<string[]>();
   const [name, setName] = useState<string>();
   const [typingName, setTypingName] = useState<string>();
-  // const [sessionID, setSessionID] = useState<string>();
+  const [sessionId, setSessionId] = useState<string>();
   const [userId, setUserId] = useState<string>();
+
+  useEffect(() => {
+    let sessionID = sessionStorage.getItem('sessionID');
+
+    if (sessionID) {
+      const lobbyRoom = 'Lobby';
+      setRoom('Lobby');
+      socket.emit('join_lobby', lobbyRoom);
+      // setRooms(rooms => [...rooms!, 'Lobby']);
+      setSessionId(sessionID);
+      socket.auth = { sessionID };
+      socket.connect();
+    }
+  }, []);
 
   //
   // Function starts when user clicks on "Join Chat" button with a username.
   //
   const createUserAndJoinLobby = (name: string) => {
     const lobbyRoom = 'Lobby';
-    let usernameAlreadySelected = false;
+    setRoom(lobbyRoom);
+    setName(name);
 
-    const sessionID = sessionStorage.getItem('sessionID');
-    // setSessionID(sessionID!);
-    console.log('sessionID: ' + sessionID)
-
+    socket.emit('join_lobby', lobbyRoom);
+    let sessionID = sessionStorage.getItem('sessionID');
     if (sessionID) {
-      usernameAlreadySelected = true;
-      socket.auth = { sessionID };
-      socket.connect();
-      return;
+      setSessionId(sessionID);
     }
+    // let usernameAlreadySelected = false;
+
+    // }
     socket.auth = { name };
     socket.connect();
 
-    socket.emit('join_lobby', lobbyRoom, name, () => {
-      setRoom(lobbyRoom);
-      setName(name);
-    });
+    //  sessionStorage.setItem('sessionID', (socket.auth as { sessionID: string }).sessionID);
   };
-
 
   //
   // Funtion runs when user clicks on a room in the list of rooms.
@@ -118,14 +127,17 @@ function SocketProvider({ children }: PropsWithChildren) {
     function session({ name, sessionID, userID }: SocketData) {
       // attach the session ID to the next reconnection attempts
 
+      // console.log(name, sessionID, userID);
+
       socket.auth = { sessionID };
       // store it in the localStorage
       sessionStorage.setItem('sessionID', sessionID?.toString()!);
 
       // TYPESCRIPT FEL
       // save the ID of the user
-      setUserId(userID)
-      
+      setUserId(userID);
+      // socket.userID = userID;
+
       // setName(name);
     }
 
@@ -181,7 +193,7 @@ function SocketProvider({ children }: PropsWithChildren) {
         isTyping,
         typingName,
         stopTyping,
-        // sessionID,
+        sessionId,
         userId,
       }}
     >

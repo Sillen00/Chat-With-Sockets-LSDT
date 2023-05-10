@@ -8,7 +8,7 @@ export interface ServerToClientEvents {
 
 export interface ClientToServerEvents {
   message: (room: string, message: string) => void;
-  join_lobby: (room: string, name: string, ack: () => void) => void;
+  join_lobby: (room: string) => void;
   join: (room: string, name: string, ack: () => void) => void;
   leave: (room: string, ack: () => void) => void;
   typing: (room: string) => void;

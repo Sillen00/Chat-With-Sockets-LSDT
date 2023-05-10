@@ -36,6 +36,7 @@ function Rooms() {
         {rooms?.map((room, i) => (
           <>
             <li
+              key={i}
               onClick={() => joinExistingRoom(room)}
               style={{
                 display: 'flex',
@@ -44,7 +45,6 @@ function Rooms() {
                 fontSize: '1.5rem',
                 cursor: 'pointer',
               }}
-              key={i}
             >
               {room}
               {/* USERS IN CHAT ROOM */}
