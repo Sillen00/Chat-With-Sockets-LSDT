@@ -21,6 +21,7 @@ interface ContextValues {
   stopTyping: () => void;
   sessionId?: string;
   userId?: string;
+  roomUsers: Record<string, string[]>;
 }
 
 const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io({ autoConnect: false });
@@ -36,6 +37,7 @@ function SocketProvider({ children }: PropsWithChildren) {
   const [typingName, setTypingName] = useState<string>();
   const [sessionId, setSessionId] = useState<string>();
   const [userId, setUserId] = useState<string>();
+  const [roomUsers, setRoomUsers] = useState<Record<string, string[]>>({});
 
   useEffect(() => {
     const sessionID = sessionStorage.getItem('sessionID');
@@ -61,13 +63,12 @@ function SocketProvider({ children }: PropsWithChildren) {
 
     socket.emit('join_lobby', lobbyRoom);
     // let usernameAlreadySelected = false;
-    
+
     // }
     setSessionId('999');
 
     socket.auth = { name };
     socket.connect();
-    
 
     //  sessionStorage.setItem('sessionID', (socket.auth as { sessionID: string }).sessionID);
   };
@@ -158,6 +159,9 @@ function SocketProvider({ children }: PropsWithChildren) {
     function stop_typing() {
       setTypingName('');
     }
+    function roomUsers(room: string, users: string[]) {
+      setRoomUsers(prev => ({ ...prev, [room]: users }));
+    }
 
     socket.on('session', session);
     socket.on('connect', connect);
@@ -166,6 +170,7 @@ function SocketProvider({ children }: PropsWithChildren) {
     socket.on('rooms', rooms);
     socket.on('typing', typing);
     socket.on('stop_typing', stop_typing);
+    socket.on('roomUsers', roomUsers);
 
     return () => {
       socket.off('session', session);
@@ -175,6 +180,7 @@ function SocketProvider({ children }: PropsWithChildren) {
       socket.off('rooms', rooms);
       socket.off('typing', typing);
       socket.off('stop_typing', stop_typing);
+      socket.off('roomUsers', roomUsers);
     };
   }, []);
 
@@ -194,6 +200,7 @@ function SocketProvider({ children }: PropsWithChildren) {
         stopTyping,
         sessionId,
         userId,
+        roomUsers,
       }}
     >
       {children}

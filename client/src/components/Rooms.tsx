@@ -1,17 +1,7 @@
 import { useSocket } from '../context/SocketContext';
 
-// Detta skall vara en lista på alla rum som finns
-// const allRooms = [
-//   {
-//     name: 'Room1',
-//   },
-//   {
-//     name: 'Room2',
-//   },
-// ];
-
 function Rooms() {
-  const { rooms, joinRoom } = useSocket();
+  const { rooms, joinRoom, roomUsers, room } = useSocket();
 
   const joinExistingRoom = (room: string) => {
     joinRoom(room);
@@ -29,14 +19,13 @@ function Rooms() {
           margin: '0',
           padding: '0',
           textTransform: 'uppercase',
-          color: "white",
+          color: 'white',
         }}
       >
         {/* CREATED ROOMS */}
         {rooms?.map((room, i) => (
-          <>
+          <div>
             <li
-              key={i}
               onClick={() => joinExistingRoom(room)}
               style={{
                 display: 'flex',
@@ -45,6 +34,7 @@ function Rooms() {
                 fontSize: '1.5rem',
                 cursor: 'pointer',
               }}
+              key={i}
             >
               {room}
               {/* USERS IN CHAT ROOM */}
@@ -62,11 +52,11 @@ function Rooms() {
                 textTransform: 'none',
               }}
             >
-              <li>User</li>
-              <li>User</li>
-              <li>User</li>
+              {roomUsers[room]?.map((user, i) => (
+                <li key={i}>{user}</li>
+              ))}
             </ul>
-          </>
+          </div>
         ))}
       </ul>
     </div>

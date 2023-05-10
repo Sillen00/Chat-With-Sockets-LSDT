@@ -16,6 +16,8 @@ const mongoClient = new MongoClient(
   'mongodb+srv://nerd:nerduserATLAS@cluster0.pg7qeoa.mongodb.net/chatter/?retryWrites=true&w=majority'
 );
 
+let userRoomMap = new Map<string, Map<string, string>>();
+
 const main = async () => {
   await mongoClient.connect();
 
@@ -77,7 +79,11 @@ const main = async () => {
 
     socket.on('join_lobby', (lobbyRoom: string) => {
       socket.join(lobbyRoom);
+      if (socket.data.name) {
+        addUserToRoom(lobbyRoom, socket.id, socket.data.name);
+      }
       io.emit('rooms', getRooms());
+      io.to(lobbyRoom).emit('roomUsers', lobbyRoom, getUsersInRoom(lobbyRoom));
     });
 
     socket.on('message', (room, message) => {
@@ -99,6 +105,8 @@ const main = async () => {
       // When a user joins a room send an updated
       // list of rooms to everyone
       io.emit('rooms', getRooms());
+      addUserToRoom(room, socket.id, name);
+      io.to(room).emit('roomUsers', room, getUsersInRoom(room));
     });
 
     socket.on('leave', (room, ack) => {
@@ -115,6 +123,8 @@ const main = async () => {
       // console.log("Left room: " + room);
       ack();
       io.emit('rooms', getRooms());
+      removeUserFromRoom(room, socket.id);
+      io.to(room).emit('roomUsers', room, getUsersInRoom(room));
     });
 
     socket.on('typing', (room: string) => {
@@ -139,6 +149,24 @@ const main = async () => {
 };
 
 main();
+
+function addUserToRoom(room: string, userId: string, userName: string) {
+  if (!userRoomMap.has(room)) {
+    userRoomMap.set(room, new Map());
+  }
+  userRoomMap.get(room)?.set(userId, userName);
+}
+
+function removeUserFromRoom(room: string, userId: string) {
+  userRoomMap.get(room)?.delete(userId);
+  if (userRoomMap.get(room)?.size === 0) {
+    userRoomMap.delete(room);
+  }
+}
+
+function getUsersInRoom(room: string) {
+  return Array.from(userRoomMap.get(room)?.values() || []);
+}
 
 function getRooms() {
   const { rooms } = io.sockets.adapter;

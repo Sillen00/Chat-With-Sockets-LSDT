@@ -4,6 +4,7 @@ export interface ServerToClientEvents {
   typing: (name: string) => void;
   stop_typing: (name: string) => void;
   session: (session: SocketData) => void;
+  roomUsers: (room: string, users: string[]) => void;
 }
 
 export interface ClientToServerEvents {
