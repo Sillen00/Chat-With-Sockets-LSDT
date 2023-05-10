@@ -1,16 +1,14 @@
 import { useSocket } from '../context/SocketContext';
 
 // Detta skall vara en lista på alla rum som finns
-export const allRooms = [
-  {
-    name: 'Room1',
-    id: '1',
-  },
-  {
-    name: 'Room2',
-    id: '1',
-  },
-];
+// const allRooms = [
+//   {
+//     name: 'Room1',
+//   },
+//   {
+//     name: 'Room2',
+//   },
+// ];
 
 function Rooms() {
   const { rooms, joinRoom } = useSocket();

@@ -29,7 +29,7 @@ const main = async () => {
   }
 
   try {
-    await mongoClient.db(DB).createCollection('sessions')
+    await mongoClient.db(DB).createCollection('sessions');
   } catch (error) {
     // collection already exists
   }
@@ -63,17 +63,16 @@ const main = async () => {
     next();
   });
 
-// 
+  //
 
   io.on('connection', socket => {
     console.log('a user connected', socket.id);
 
-
-// socket.emit("session", {
-  // sessionID: socket.sessionID,
-  // userID: socket.userID,
-// });
-
+    socket.emit('session', {
+      name: socket.data.name,
+      sessionID: socket.data.sessionID,
+      userID: socket.data.userID,
+    });
 
     socket.on('join_lobby', (lobbyRoom: string, name: string, ack) => {
       socket.data.name = name;
