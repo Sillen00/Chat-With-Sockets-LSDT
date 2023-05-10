@@ -3,7 +3,6 @@
 * {
   box-sizing: border-box;
 }
-
 body {
   margin: 0;
   padding: 0;
@@ -11,7 +10,6 @@ body {
   font-family: 'Lexend';
   overflow: hidden;
 }
-
 ::-webkit-scrollbar {
   width: 0.5em;
 }
@@ -21,40 +19,34 @@ body {
 ::-webkit-scrollbar-thumb {
   background-color: rgb(200, 200, 200);
 }
-
 .login-body {
   background-image: url('../src/assets/purple.png');
   background-repeat: no-repeat;
   background-position: center;
 }
-
 .login-container {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 50vh;
   width: 40vh;
-  background-color: #1B4866;
+  background-color: #1b4866;
   border-radius: 10px;
   border: 1px solid black !important;
   padding: 10rem;
   color: white;
 }
-
 .lobby-row {
-  height: calc(100vh - 64px); /* 64px is the height of the navbar */
+  height: calc(100vh - 69px);
   margin: 0;
   overflow: hidden;
 }
-
-
 #custom-navbar {
-  background: #1B4866;
+  background: #1b4866;
   position: relative;
   height: 64px;
   width: 100%;
   border-bottom: 1px solid black;
-
 }
 .hide-on-mobile {
   display: flex;
@@ -62,22 +54,18 @@ body {
   flex-direction: column;
   justify-content: space-between;
 }
-
-
 .info-bar {
-  background-color: #1B4866;
+  background-color: #1b4866;
   border-left: 2px solid black;
   height: 100%;
   padding: 1rem;
   color: white;
 }
-
 .message-item {
   display: inline-block;
   width: fit-content;
   border: 1px solid black !important;
 }
-
 .nopadding {
   padding: 0 !important;
   overflow: hidden;
@@ -88,7 +76,7 @@ body {
   #offcanvasNavbar-expand-lg .justify-content-end.flex-grow-1.pe-3 > * {
     opacity: 0;
     visibility: hidden;
-    display: none;   
+    display: none;
   }
   #fluid-desk {
     position: absolute;
@@ -107,11 +95,9 @@ body {
     height: 100vh;
     width: 100%;
   }
-
   #custom-navbar-nav {
     border-bottom: 1px solid black;
   }
-
   #offcanvas-content {
     display: none;
   }
@@ -122,37 +108,23 @@ body {
     opacity: 0;
     visibility: hidden;
     display: none;
-    
   }
   .info-bar {
     display: none;
-    
   }
- 
-
-
   #custom-navbar {
-   position: fixed;
-   display: flex;
-   
-   
+    position: fixed;
+    display: flex;
   }
   .msg-list-group {
     margin-top: 4rem;
-
   }
-
   .send-message-mobile {
     position: fixed;
-    z-index: 23;
     bottom: 0;
-    overflow-y: auto;
-    
-    
-    
   }
   .msg-window-mobile {
-    max-height: 93vh;
+    max-height: 91vh;
     overflow-y: auto;
   }
 }
