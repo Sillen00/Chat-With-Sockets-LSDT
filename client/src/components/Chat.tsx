@@ -13,7 +13,7 @@ let typingTimeout: ReturnType<typeof setTimeout> | null = null;
 function Chat() {
   // const location = useLocation();
   // const { name } = location.state;
-  const { messages, sendMessage, isTyping, typingName, stopTyping } = useSocket();
+  const { messages, sendMessage, isTyping, typingName, stopTyping, name } = useSocket();
   const [message, setMessage] = useState('');
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -26,9 +26,15 @@ function Chat() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    
+    if (message.trim().length === 0) {
+      return;
+    }
+  
     sendMessage(message);
     setMessage('');
   };
+  
 
   // const [chatText, setChatText] = useState('');
   // const [messages, setMessages] = useState<Message[]>([]);
@@ -73,9 +79,8 @@ function Chat() {
 
   return (
     <div
-      className='chat-container'
       style={{
-        minHeight: '100vh',
+        height: '100vh',
         backgroundImage: `url(${purple})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
@@ -89,7 +94,9 @@ function Chat() {
               {messages.map((msg, index) => (
                 <ListGroup.Item
                   key={index}
-                  className='message-item'
+                  className={`message-item ${
+                    msg.name === name ? 'message-item-right' : 'message-item-left other'
+                  }`}
                   style={{ borderRadius: '0px 10px 10px 10px', marginTop: '1rem' }}
                 >
                   <strong>{msg.name}: </strong>
@@ -104,7 +111,7 @@ function Chat() {
           <Col className='send-message-mobile'>
             {/* SHOWS WHO'S TYPING */}
             {typingName ? <div>{typingName} is typing...</div> : null}
-  
+
             <Form onSubmit={handleSubmit}>
               <InputGroup style={{ display: 'flex', gap: '1rem', marginBottom: '1rem' }}>
                 <input
@@ -135,8 +142,6 @@ function Chat() {
       </Container>
     </div>
   );
-
-                };
-  
+}
 
 export default Chat;
