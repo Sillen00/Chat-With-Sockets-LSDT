@@ -68,11 +68,13 @@ const main = async () => {
   io.on('connection', socket => {
     console.log('a user connected', socket.id);
 
-    socket.emit('session', {
+
+    const session ={
       name: socket.data.name,
       sessionID: socket.data.sessionID,
       userID: socket.data.userID,
-    });
+    }
+    socket.emit('session', session);
 
     socket.on('join_lobby', (lobbyRoom: string, name: string, ack) => {
       socket.data.name = name;
