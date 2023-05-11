@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useSocket } from '../context/SocketContext';
 
 // Detta skall vara en lista på alla DM's eller online users som finns
 export const dm = [
@@ -9,6 +10,7 @@ export const dm = [
 
 function DirectMessage() {
   const [showList, setShowList] = useState(false);
+  const { allUsers } = useSocket();
 
   const handleButtonClick = () => {
     setShowList(!showList);
@@ -17,7 +19,7 @@ function DirectMessage() {
   return (
     <div style={{ color: 'white' }}>
       <ul>
-        {dm.map((item, i) => (
+        {allUsers?.map((item, i) => (
           <li key={i}>{item.name}</li>
         ))}
       </ul>

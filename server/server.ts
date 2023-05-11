@@ -64,8 +64,10 @@ const main = async () => {
   });
 
   //
+  const allUsers = await sessionCollection.find().toArray();
 
   io.on('connection', socket => {
+
     console.log('a user connected', socket.id);
 
     const session = {
@@ -79,6 +81,11 @@ const main = async () => {
       socket.join(lobbyRoom);
       io.emit('rooms', getRooms());
     });
+
+
+    socket.emit('all_users', allUsers);
+    
+
 
     socket.on('message', (room, message) => {
       io.to(room).emit('message', socket.data.name!, message);

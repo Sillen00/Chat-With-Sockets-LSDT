@@ -21,6 +21,7 @@ interface ContextValues {
   stopTyping: () => void;
   sessionId?: string;
   userId?: string;
+  allUsers?: SocketData[];
 }
 
 const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io({ autoConnect: false });
@@ -36,6 +37,7 @@ function SocketProvider({ children }: PropsWithChildren) {
   const [typingName, setTypingName] = useState<string>();
   const [sessionId, setSessionId] = useState<string>();
   const [userId, setUserId] = useState<string>();
+  const [allUsers, setAllUsers] = useState<SocketData[]>();
 
   useEffect(() => {
     const sessionID = sessionStorage.getItem('sessionID');
@@ -159,6 +161,10 @@ function SocketProvider({ children }: PropsWithChildren) {
       setTypingName('');
     }
 
+    function all_users(users: SocketData[]) {
+      setAllUsers(users);
+    }
+
     socket.on('session', session);
     socket.on('connect', connect);
     socket.on('disconnect', disconnect);
@@ -166,7 +172,8 @@ function SocketProvider({ children }: PropsWithChildren) {
     socket.on('rooms', rooms);
     socket.on('typing', typing);
     socket.on('stop_typing', stop_typing);
-
+    socket.on('all_users', all_users);
+    
     return () => {
       socket.off('session', session);
       socket.off('connect', connect);
@@ -175,6 +182,7 @@ function SocketProvider({ children }: PropsWithChildren) {
       socket.off('rooms', rooms);
       socket.off('typing', typing);
       socket.off('stop_typing', stop_typing);
+      socket.off('all_users', all_users);
     };
   }, []);
 
@@ -194,6 +202,7 @@ function SocketProvider({ children }: PropsWithChildren) {
         stopTyping,
         sessionId,
         userId,
+        allUsers,
       }}
     >
       {children}
