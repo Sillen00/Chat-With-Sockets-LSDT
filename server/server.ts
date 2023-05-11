@@ -108,11 +108,11 @@ const main = async () => {
       // list of rooms to everyone
       io.emit('rooms', getRooms());
     });
-
+    
     socket.on('leave', (room, ack) => {
       console.log('Try to leave room: ' + room);
       const { rooms } = io.sockets.adapter;
-
+      
       for (const [name, setOfSocketIds] of rooms) {
         console.log(name);
         if (name === room) {
@@ -124,30 +124,31 @@ const main = async () => {
       ack();
       io.emit('rooms', getRooms());
     });
-
+    
     socket.on('typing', (room: string) => {
       const name = socket.data.name;
       if (name) {
         socket.to(room).emit('typing', name);
       }
     });
-
+    
     socket.on('stop_typing', () => {
       const name = socket.data.name;
       if (name) {
         socket.broadcast.emit('stop_typing', name);
       }
     });
-
+    
     socket.on('disconnect', () => {
       io.emit('all_users', getAllOnlineUsers());
+      io.emit('rooms', getRooms());
     });
-
+    
     // When a new user connects send the list of rooms
     socket.emit('rooms', getRooms());
     io.emit('all_users', getAllOnlineUsers());
   });
-
+  
   io.listen(3000);
 };
 
