@@ -21,8 +21,9 @@ body {
 }
 .login-body {
   background-image: url('../src/assets/purple.png');
-  background-repeat: no-repeat;
+  background-size: cover;
   background-position: center;
+ 
 }
 .login-container {
   display: flex;
