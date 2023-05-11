@@ -67,8 +67,24 @@ const main = async () => {
   const allUsers = await sessionCollection.find().toArray();
 
   io.on('connection', socket => {
-
     console.log('a user connected', socket.id);
+
+    // socket.on('disconnect', async () => {
+    //   console.log('user disconnected', socket.id);
+
+    //   const matchingSockets = await io.in(socket.data.userID!).allSockets();
+    //   const isDisconnected = matchingSockets.size === 0;
+    //   if (isDisconnected) {
+    //     // notify other users
+    //     // socket.broadcast.emit('user disconnected', socket.data.userID);
+    //     // update the connection status of the session
+    //     sessionStorage.saveSession(socket.data.sessionID, {
+    //       userID: socket.data.userID,
+    //       username: socket.data.name,
+    //       connected: false,
+    //     });
+    //   }
+    // });
 
     const session = {
       name: socket.data.name,
@@ -82,10 +98,7 @@ const main = async () => {
       io.emit('rooms', getRooms());
     });
 
-
     socket.emit('all_users', allUsers);
-    
-
 
     socket.on('message', (room, message) => {
       io.to(room).emit('message', socket.data.name!, message);
