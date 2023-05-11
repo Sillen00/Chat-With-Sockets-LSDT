@@ -37,7 +37,7 @@ function Rooms() {
           <>
             <li
               key={i}
-              onClick={() => joinExistingRoom(room)}
+              onClick={() => joinExistingRoom(room.name)}
               style={{
                 display: 'flex',
                 justifyContent: 'center',
@@ -46,7 +46,7 @@ function Rooms() {
                 cursor: 'pointer',
               }}
             >
-              {room}
+              {room.name}
               {/* USERS IN CHAT ROOM */}
             </li>
             <ul
@@ -62,9 +62,7 @@ function Rooms() {
                 textTransform: 'none',
               }}
             >
-              <li>User</li>
-              <li>User</li>
-              <li>User</li>
+              {room.users.map(user => <li>{user.name}</li>)}
             </ul>
           </>
         ))}

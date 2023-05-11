@@ -12,7 +12,7 @@ import LeaveRoom from './LeaveRoom';
 
 function Header() {
   const [showRooms, setShowRooms] = useState(true);
-  const { name } = useSocket();
+  const { name, room } = useSocket();
 
   const toggleRooms = () => {
     setShowRooms(!showRooms);
@@ -21,10 +21,13 @@ function Header() {
   return (
     <>
       <Navbar id='custom-navbar' expand='md' sticky='top'>
-        <Container id='fluid-desk' fluid>
+        <Container fluid>
           <div className=' d-flex align-items-center flex-row'>
             <img src={chatterappLogo} alt='logo' width='100' />
           </div>
+          <h6 style={{color: "white"}}>
+            {name} || {room}
+          </h6>
 
           <div>
             <Navbar.Toggle
@@ -38,7 +41,7 @@ function Header() {
               placement='end'
             >
               <Offcanvas.Header closeButton>
-                <Offcanvas.Title id='offcanvasNavbarLabel-expand-lg'>{name}</Offcanvas.Title>
+                <Offcanvas.Title id='offcanvasNavbarLabel-expand-lg'>{name} || {room}</Offcanvas.Title>
               </Offcanvas.Header>
               <Offcanvas.Body>
                 <Nav
@@ -50,9 +53,9 @@ function Header() {
                   <div className='leave-room-btn'>
                     <LeaveRoom />
                   </div>
-              <div style={{marginTop: "auto"}}>
-                <CreateARoom />
-              </div>
+                  <div style={{ marginTop: 'auto' }}>
+                    <CreateARoom />
+                  </div>
                 </Nav>
               </Offcanvas.Body>
             </Navbar.Offcanvas>

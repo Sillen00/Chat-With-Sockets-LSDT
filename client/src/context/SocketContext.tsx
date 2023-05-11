@@ -3,8 +3,10 @@ import { Socket, io } from 'socket.io-client';
 import type {
   ClientToServerEvents,
   Message,
+  Room,
   ServerToClientEvents,
   SocketData,
+  User,
 } from '../../../server/communication';
 
 interface ContextValues {
@@ -14,13 +16,14 @@ interface ContextValues {
   sendMessage: (message: string) => void;
   room?: string;
   messages: Message[];
-  rooms?: string[];
+  rooms?: Room[];
   name?: string;
   isTyping: () => void;
   typingName?: string;
   stopTyping: () => void;
   sessionId?: string;
   userId?: string;
+  allUsers?: User[];
 }
 
 const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io({ autoConnect: false });
@@ -31,11 +34,12 @@ export const useSocket = () => useContext(SocketContext);
 function SocketProvider({ children }: PropsWithChildren) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [room, setRoom] = useState<string>();
-  const [rooms, setRooms] = useState<string[]>();
+  const [rooms, setRooms] = useState<Room[]>();
   const [name, setName] = useState<string>();
   const [typingName, setTypingName] = useState<string>();
   const [sessionId, setSessionId] = useState<string>();
   const [userId, setUserId] = useState<string>();
+  const [allUsers, setAllUsers] = useState<User[]>();
 
   useEffect(() => {
     const sessionID = sessionStorage.getItem('sessionID');
@@ -61,13 +65,12 @@ function SocketProvider({ children }: PropsWithChildren) {
 
     socket.emit('join_lobby', lobbyRoom);
     // let usernameAlreadySelected = false;
-    
+
     // }
     setSessionId('999');
 
     socket.auth = { name };
     socket.connect();
-    
 
     //  sessionStorage.setItem('sessionID', (socket.auth as { sessionID: string }).sessionID);
   };
@@ -149,7 +152,7 @@ function SocketProvider({ children }: PropsWithChildren) {
     function message(name: string, message: string) {
       setMessages(messages => [...messages, { name, message }]);
     }
-    function rooms(rooms: string[]) {
+    function rooms(rooms: Room[]) {
       setRooms(rooms);
     }
     function typing(name: string) {
@@ -159,6 +162,10 @@ function SocketProvider({ children }: PropsWithChildren) {
       setTypingName('');
     }
 
+    function all_users(users: User[]) {
+      setAllUsers(users);
+    }
+
     socket.on('session', session);
     socket.on('connect', connect);
     socket.on('disconnect', disconnect);
@@ -166,6 +173,7 @@ function SocketProvider({ children }: PropsWithChildren) {
     socket.on('rooms', rooms);
     socket.on('typing', typing);
     socket.on('stop_typing', stop_typing);
+    socket.on('all_users', all_users);
 
     return () => {
       socket.off('session', session);
@@ -175,6 +183,7 @@ function SocketProvider({ children }: PropsWithChildren) {
       socket.off('rooms', rooms);
       socket.off('typing', typing);
       socket.off('stop_typing', stop_typing);
+      socket.off('all_users', all_users);
     };
   }, []);
 
@@ -194,6 +203,7 @@ function SocketProvider({ children }: PropsWithChildren) {
         stopTyping,
         sessionId,
         userId,
+        allUsers,
       }}
     >
       {children}

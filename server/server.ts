@@ -4,8 +4,10 @@ import { Server } from 'socket.io';
 import type {
   ClientToServerEvents,
   InterServerEvents,
+  Room,
   ServerToClientEvents,
   SocketData,
+  User,
 } from './communication';
 
 const io = new Server<ClientToServerEvents, ServerToClientEvents, InterServerEvents, SocketData>();
@@ -56,24 +58,25 @@ const main = async () => {
       return next(new Error('invalid name'));
     }
     // create new session for new user
-    socket.data.sessionID = Date.now().toString();
-    socket.data.userID = Date.now().toString();
+    socket.data.sessionID = Math.random().toString().slice(2);
+    socket.data.userID = Math.random().toString().slice(2);
     socket.data.name = name;
     await sessionCollection.insertOne(socket.data as SocketData);
     next();
   });
-
+  
   //
-
+  // const allUsers = await sessionCollection.toArray();
+  
   io.on('connection', socket => {
     console.log('a user connected', socket.id);
 
-    const session = {
-      name: socket.data.name,
-      sessionID: socket.data.sessionID,
-      userID: socket.data.userID,
-    };
-    socket.emit('session', session);
+    // const session = {
+    //   name: socket.data.name,
+    //   sessionID: socket.data.sessionID,
+    //   userID: socket.data.userID,
+    // };
+    socket.emit('session', socket.data as SocketData);
 
     socket.on('join_lobby', (lobbyRoom: string) => {
       socket.join(lobbyRoom);
@@ -83,9 +86,13 @@ const main = async () => {
     socket.on('message', (room, message) => {
       io.to(room).emit('message', socket.data.name!, message);
       console.log(room, socket.data.name, message);
+      // Save message to database
     });
 
     socket.on('join', (room, name, ack) => {
+      'DM-<userID>-<userID>';
+      //socket.data.userID måste finnas i room namnet om man ska få joina
+
       //socket.rooms
       const { rooms } = io.sockets.adapter;
       for (const [name, setOfSocketIds] of rooms) {
@@ -94,6 +101,7 @@ const main = async () => {
         }
       }
       socket.join(room);
+      // Get all message from database and send to client
 
       ack();
       // When a user joins a room send an updated
@@ -131,8 +139,13 @@ const main = async () => {
       }
     });
 
+    socket.on('disconnect', () => {
+      io.emit('all_users', getAllOnlineUsers());
+    });
+
     // When a new user connects send the list of rooms
     socket.emit('rooms', getRooms());
+    io.emit('all_users', getAllOnlineUsers());
   });
 
   io.listen(3000);
@@ -142,17 +155,33 @@ main();
 
 function getRooms() {
   const { rooms } = io.sockets.adapter;
-  const roomsFound: string[] = [];
-
-  // console.log(rooms);
-
+  const roomsFound: Room[] = [];
+  
   for (const [name, setOfSocketIds] of rooms) {
     // An actual real room that we created
     if (!setOfSocketIds.has(name)) {
-      roomsFound.push(name);
+      roomsFound.push({
+        name,
+        users: [],
+      });
+      // io.sockets.sockets.filter(...setOfSocketIds...)...
     }
-    // console.log(setOfSocketIds);
   }
 
   return roomsFound;
+}
+
+function getAllOnlineUsers() {
+  const allSockets = io.sockets.sockets;
+  const usersFound: User[] = [];
+
+  for (const [socketId, socket] of allSockets) {
+    // An actual real room that we created
+    usersFound.push({
+      name: socket.data.name!,
+      userID: socket.data.userID!,
+    });
+  }
+
+  return usersFound;
 }
