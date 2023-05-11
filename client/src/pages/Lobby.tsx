@@ -25,8 +25,12 @@ function Lobby() {
         <Header />
         <div
           className='hide-on-mobile '
-          style={{ backgroundColor: '#1B4866', height: '100%', padding: '1rem', alignItems: "center" }}
-
+          style={{
+            backgroundColor: '#1B4866',
+            height: '100%',
+            padding: '1rem',
+            alignItems: 'center',
+          }}
         >
           <ButtonGroupToggle />
           <CreateARoom />
@@ -36,7 +40,9 @@ function Lobby() {
         <Chat />
       </Col>
       <Col md={3} className='info-bar'>
-        <h3>You are in room: {room}</h3>
+        <h3>
+          {name}, are in room: {room}
+        </h3>
         <div>
           <LeaveRoom />
         </div>
