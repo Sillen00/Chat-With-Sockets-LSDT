@@ -7,6 +7,7 @@ import chatterappLogo from '../assets/logoChat.png';
 import { useSocket } from '../context/SocketContext';
 import '../index.css';
 import ButtonGroupToggle from './ButtonGroupToggle';
+import CreateARoom from './CreateARoom';
 import LeaveRoom from './LeaveRoom';
 
 function Header() {
@@ -43,12 +44,15 @@ function Header() {
                 <Nav
                   id='offcanvas-content'
                   className='justify-content-end flex-grow-1 pe-3 '
-                  style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}
+                  style={{ display: 'flex', gap: '1rem', alignItems: 'center', height: '100%' }}
                 >
                   <ButtonGroupToggle />
                   <div className='leave-room-btn'>
                     <LeaveRoom />
                   </div>
+              <div style={{marginTop: "auto"}}>
+                <CreateARoom />
+              </div>
                 </Nav>
               </Offcanvas.Body>
             </Navbar.Offcanvas>
