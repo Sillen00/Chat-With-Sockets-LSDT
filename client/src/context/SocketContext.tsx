@@ -140,7 +140,7 @@ function SocketProvider({ children }: PropsWithChildren) {
       setUserId(userID);
       // socket.userID = userID;
 
-      // setName(name);
+      setName(name);
     }
 
     function connect() {
